@@ -1,0 +1,41 @@
+﻿@model GetChefByIdDto
+
+@{
+    ViewData["Title"] = "UpdateChef";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Şef Güncelleme Sayfası</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <input type="hidden" asp-for="ChefId" />
+                            <label>Şef Adı Soyadı</label>
+                            <input type="text" asp-for="NameSurname" class="form-control" />
+                            <br />
+                            <label>Şef Unvan/Başlık</label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <br />
+                            <label>Açıklama Bilgisi</label>
+                            <input type="text" asp-for="Description" class="form-control" />
+                            <br />
+                            <label>Şef Görsel URL</label>
+                            <input type="text" asp-for="ImageUrl" class="form-control" />
+                            <br />
+                            <button class="btn btn-primary">Şefi Kaydet</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
