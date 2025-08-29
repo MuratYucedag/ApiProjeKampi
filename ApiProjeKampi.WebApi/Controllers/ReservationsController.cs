@@ -59,5 +59,33 @@ namespace ApiProjeKampi.WebApi.Controllers
             _context.SaveChanges();
             return Ok("Rezervasyon güncelleme işlemi başarılı");
         }
+
+        [HttpGet("GetTotalReservationCount")]
+        public IActionResult GetTotalReservationCount()
+        {
+            var value = _context.Reservations.Count();
+            return Ok(value);
+        }
+
+        [HttpGet("GetTotalCustomerCount")]
+        public IActionResult GetTotalCustomerCount()
+        {
+            var value = _context.Reservations.Sum(x => x.CountofPeople);
+            return Ok(value);
+        }
+
+        [HttpGet("GetPendingReservations")]
+        public IActionResult GetPendingReservations()
+        {
+            var value = _context.Reservations.Where(x => x.ReservationStatus == "Onay Bekliyor").Count();
+            return Ok(value);
+        }
+
+        [HttpGet("GetApprovedReservations")]
+        public IActionResult GetApprovedReservations()
+        {
+            var value = _context.Reservations.Where(x => x.ReservationStatus == "Onaylandı").Count();
+            return Ok(value);
+        }
     }
 }

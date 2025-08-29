@@ -1,0 +1,200 @@
+﻿public IActionResult RevenueChart()
+{
+    var vm = new RevenueChartViewModel
+    {
+        Labels = new List<string> { "Jan", "Feb", "Mar", "Apr", "May", "Jun" },
+        Income = new List<int> { 5, 15, 14, 36, 32, 32 },
+        Expense = new List<int> { 7, 11, 30, 18, 25, 13 },
+        WeeklyEarnings = 675,
+        MonthlyEarnings = 1587,
+        YearlyEarnings = 45965,
+        TotalCustomers = 8257,
+        TotalIncome = 9857,
+        ProjectCompleted = 28,
+        TotalExpense = 6287,
+        NewCustomers = 684
+    };
+
+    return View(vm);
+}
+
+-----------------
+
+public class RevenueChartViewModel
+{
+    public List<string> Labels { get; set; } = new();
+    public List<int> Income { get; set; } = new();
+    public List<int> Expense { get; set; } = new();
+
+    // Alt kutucuk verileri
+    public decimal WeeklyEarnings { get; set; }
+    public decimal MonthlyEarnings { get; set; }
+    public decimal YearlyEarnings { get; set; }
+
+    public int TotalCustomers { get; set; }
+    public decimal TotalIncome { get; set; }
+    public int ProjectCompleted { get; set; }
+    public decimal TotalExpense { get; set; }
+    public int NewCustomers { get; set; }
+}
+
+------------------
+
+
+@model RevenueChartViewModel
+@{
+    Layout = null; // Eğer Layout kullanıyorsan bu satırı kaldır
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Revenue Chart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        .text-big {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <!-- Card Header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">Revenue chart</h4>
+          <div class="card-header-action">
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown">
+                Options
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><i class="fas fa-eye"></i> View</a></li>
+                <li><a class="dropdown-item" href="#"><i class="far fa-edit"></i> Edit</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#"><i class="far fa-trash-alt"></i> Delete</a></li>
+              </ul>
+            </div>
+            <a href="#" class="btn btn-primary ms-2">View All</a>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="row">
+            <!-- Chart and Earnings -->
+            <div class="col-lg-9 border-end">
+              <!-- Chart -->
+              <div class="p-3 bg-light mb-3">
+                <canvas id="revenueChart" height="100"></canvas>
+              </div>
+              <!-- Earnings -->
+              <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                  <div class="p-3">
+                    <i class="fas fa-arrow-circle-up text-success"></i>
+                    <h5 class="mb-1">$@Model.WeeklyEarnings</h5>
+                    <p class="text-muted mb-0">Weekly Earnings</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="p-3">
+                    <i class="fas fa-arrow-circle-down text-warning"></i>
+                    <h5 class="mb-1">$@Model.MonthlyEarnings</h5>
+                    <p class="text-muted mb-0">Monthly Earnings</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="p-3">
+                    <i class="fas fa-arrow-circle-up text-success"></i>
+                    <h5 class="mb-1">$@Model.YearlyEarnings</h5>
+                    <p class="text-muted mb-0">Yearly Earnings</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="col-lg-3">
+              <div class="mt-4">
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Total customers</span>
+                  <span><strong>@Model.TotalCustomers</strong> <sup class="text-success">+09%</sup></span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Total Income</span>
+                  <span><strong>$@Model.TotalIncome</strong> <sup class="text-danger">-18%</sup></span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Project completed</span>
+                  <span><strong>@Model.ProjectCompleted</strong> <sup class="text-success">+16%</sup></span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Total expense</span>
+                  <span><strong>$@Model.TotalExpense</strong> <sup class="text-success">+09%</sup></span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>New Customers</span>
+                  <span><strong>@Model.NewCustomers</strong> <sup class="text-success">+22%</sup></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div> <!-- End Card Body -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Labels)),
+            datasets: [
+                {
+                    label: 'Income',
+                    data: @Html.Raw(Json.Serialize(Model.Income)),
+                    borderColor: '#6c63ff',
+                    backgroundColor: 'rgba(108,99,255,0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#6c63ff'
+                },
+                {
+                    label: 'Expense',
+                    data: @Html.Raw(Json.Serialize(Model.Expense)),
+                    borderColor: '#6c757d',
+                    backgroundColor: 'rgba(108,117,125,0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#6c757d'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 5 }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
