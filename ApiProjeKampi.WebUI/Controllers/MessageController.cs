@@ -47,7 +47,7 @@ namespace ApiProjeKampi.WebUI.Controllers
                 return RedirectToAction("MessageList");
             }
             return View();
-        }
+        }   
 
         public async Task<IActionResult> DeleteMessage(int id)
         {
