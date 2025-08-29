@@ -1,0 +1,48 @@
+﻿@model List<ResultContactDto>
+
+@{
+    ViewData["Title"] = "ContactList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>İletişim Bilgileri Listesi</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Adres</th>
+                                    <th scope="col">Telefon</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Açık Saatler</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Address</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.OpenHours</td>
+                                        <td><a href="/Contact/DeleteContact/@item.ContactId/" class="btn btn-danger">Sil</a></td>
+                                        <td><a href="/Contact/UpdateContact/@item.ContactId/" class="btn btn-success">Güncelle</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a href="/Contact/CreateContact/" class="btn btn-info">Yeni İletişim Bilgisi Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

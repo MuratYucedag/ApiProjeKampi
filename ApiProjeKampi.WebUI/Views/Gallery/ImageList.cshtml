@@ -1,0 +1,46 @@
+﻿@model List<ResultImageDto>
+@{
+    ViewData["Title"] = "ImageList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="bootstrap snippet">
+                            <section id="portfolio" class="gray-bg padding-top-bottom">
+                                <!--==== Portfolio Filters ====-->
+                                <!-- ======= Portfolio items ===-->
+                                <div class="projects-container scrollimation in">
+                                    <div class="row">
+                                        @foreach (var item in Model)
+                                        {
+                                            <article class="col-md-4 col-sm-6 portfolio-item web-design apps psd">
+                                                <div class="portfolio-thumb in">
+                                                    <a href="#" class="main-link">
+                                                        <img class="img-responsive img-center" src="@item.ImageUrl" alt="">
+                                                        <span class="project-title">@item.Title</span>
+                                                        <span class="overlay-mask"></span>
+                                                    </a>
+                                                    <a class="enlarge cboxElement" href="#" title="@item.Title">
+                                                        <i class="fa fa-expand fa-fw"></i>
+                                                    </a>
+                                                    <a class="link" href="#"><i class="fa fa-eye fa-fw"></i></a>
+                                                </div>
+                                            </article>
+                                        }
+
+
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

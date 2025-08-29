@@ -1,4 +1,4 @@
-﻿namespace ApiProjeKampi.WebApi.Dtos.MessageDtos
+﻿namespace ApiProjeKampi.WebUI.Dtos.MessageDtos
 {
     public class CreateMessageDto
     {

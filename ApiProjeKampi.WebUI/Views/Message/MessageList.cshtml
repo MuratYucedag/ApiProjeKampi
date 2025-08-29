@@ -1,0 +1,54 @@
+﻿@model List<ResultMessageDto>
+
+@{
+    ViewData["Title"] = "MessageList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Gelen Mesaj Listesi</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Gönderici</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Konu</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Mesajı Aç</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <th scope="row">@count</th>
+                                        <td>@item.NameSurname</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Subject</td>
+                                        <td>@item.SendDate.ToString("dd-MMM-yyyy")</td>
+                                        <td><a href="/Message/AsnwerMessageWithOpenAI/@item.MessageId/" class="btn btn-warning">Mesajı Aç</a></td>
+                                        <td><a href="/Message/DeleteMessage/@item.MessageId/" class="btn btn-danger">Sil</a></td>
+                                        <td><a href="/Message/UpdateMessage/@item.MessageId/" class="btn btn-success">Güncelle</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a href="/Message/CreateMessage/" class="btn btn-info">Yeni Mesaj Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

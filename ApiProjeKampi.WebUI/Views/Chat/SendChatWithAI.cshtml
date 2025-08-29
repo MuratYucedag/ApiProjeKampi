@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "SendChatWithAI";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div id="chat" style="border:1px solid #ddd;border-radius:12px;padding:12px;min-height:280px;white-space:pre-wrap"></div>
+<div id="typing" style="opacity:.7;font-style:italic;margin-top:6px;display:none">Yazıyor...</div>
+
+<div style="display:flex;gap:8px;margin-top:12px">
+    <input id="messageInput" type="text" placeholder="Mesajınızı yazın..." style="flex:1;padding:8px" />
+    <button id="sendBtn">Gönder</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+<script>
+    const chat = document.getElementById('chat');
+    const typing = document.getElementById('typing');
+    const input = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    let bufEl = null;
+
+    const conn = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .withAutomaticReconnect()
+        .build();
+
+    conn.on("ReceiveUserEcho", (text) => {
+        const div = document.createElement('div');
+        div.style.margin = '8px 0';
+        div.style.fontWeight = '600';
+        div.textContent = "Sen: " + text;
+        chat.appendChild(div);
+        chat.scrollTop = chat.scrollHeight;
+    });
+
+    conn.on("ReceiveToken", (token) => {
+        typing.style.display = 'block';
+        if (!bufEl) {
+            bufEl = document.createElement('div');
+            bufEl.style.margin = '8px 0';
+            bufEl.style.background = '#f7f7f8';
+            bufEl.style.padding = '8px';
+            bufEl.style.borderRadius = '8px';
+            bufEl.textContent = "";
+            chat.appendChild(bufEl);
+        }
+        bufEl.textContent += token;
+        chat.scrollTop = chat.scrollHeight;
+    });
+
+    conn.on("CompleteMessage", (_full) => {
+        typing.style.display = 'none';
+        bufEl = null;
+        chat.scrollTop = chat.scrollHeight;
+    });
+
+    async function start() {
+        try { await conn.start(); } catch (e) { console.error(e); setTimeout(start, 1500); }
+    }
+    start();
+
+    async function send() {
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = "";
+        bufEl = null;
+        typing.style.display = 'block';
+        await conn.invoke("SendMessage", text);
+    }
+
+    sendBtn.addEventListener('click', send);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+</script>

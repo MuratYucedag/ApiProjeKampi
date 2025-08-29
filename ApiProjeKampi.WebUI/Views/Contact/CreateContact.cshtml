@@ -1,0 +1,42 @@
+﻿@model CreateContactDto
+
+@{
+    ViewData["Title"] = "CreateContact";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Yeni İletişim Bilgisi Ekleme Sayfası</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <label>Adres</label>
+                            <input type="text" asp-for="Address" class="form-control" />
+                            <br />
+                            <label>Telefon</label>
+                            <input type="text" asp-for="Phone" class="form-control" />
+                            <br />
+                            <label>Email Adresi</label>
+                            <input type="text" asp-for="Email" class="form-control" />
+                            <br />
+                            <label>Açık Saatler</label>
+                            <input type="text" asp-for="OpenHours" class="form-control" />
+                            <br />
+                            <label>Harita Lokasyon Bilgisi</label>
+                            <input type="text" asp-for="MapLocation" class="form-control" />
+                            <br />
+                            <button class="btn btn-primary">İletişim Bilgisini Oluştur</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
