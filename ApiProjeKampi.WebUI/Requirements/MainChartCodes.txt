@@ -1,11 +1,32 @@
-﻿@using Newtonsoft.Json
+﻿private readonly IHttpClientFactory _httpClientFactory;
+
+    public _DashboardMainChartComponentPartial(IHttpClientFactory httpClientFactory)
+    {
+        _httpClientFactory = httpClientFactory;
+    }
+
+    public async Task<IViewComponentResult> InvokeAsync()
+    {
+        var client = _httpClientFactory.CreateClient();
+        client.BaseAddress = new Uri("https://localhost:5001"); // API adresin burası olacak
+
+        var response = await client.GetAsync("api/Dashboard/GetReservationStats");
+        var json = await response.Content.ReadAsStringAsync();
+
+        var data = JsonConvert.DeserializeObject<List<ReservationChartDto>>(json);
+
+        return View(data);
+
+---------------------------------------------------------------------------------
+
+
 @model List<ReservationChartDto>
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="mb-0">Rezervasyon Durum Grafiği</h4>
+        <h4 class="mb-0">Reservation Chart</h4>
         <div class="card-header-action">
-            <a href="/Reservation/ReservationList/" class="btn btn-primary">Tümünü Gör</a>
+            <a href="#" class="btn btn-primary">View All</a>
         </div>
     </div>
 
@@ -67,3 +88,7 @@
         }
     });
 </script>
+
+
+-------------------------------------------------------------------------------
+
