@@ -1,0 +1,229 @@
+﻿Restoranımız, yılların verdiği deneyim ve tutkuyla misafirlerimize sadece yemek değil, aynı zamanda unutulmaz bir deneyim sunmak için kurulmuştur.
+Her bir tarifimizde, taptaze malzemeler, geleneksel lezzetler ve modern dokunuşlar bir araya gelir.
+Amacımız, sofranıza yalnızca doyurucu tabaklar değil; keyifli sohbetler, samimi bir atmosfer ve güler yüzlü bir hizmet taşımaktır.
+
+Misafirlerimiz için hazırladığımız menüde, damak zevkine hitap eden farklı tatları bir arada bulacaksınız.
+Geleneksel mutfağın izlerini taşıyan yemeklerimizin yanında, yenilikçi tariflerimizle de sizi farklı bir yolculuğa çıkarıyoruz.
+Her lokmada, mutfağımızın emeğini, şeflerimizin ustalığını ve kaliteye verdiğimiz önemi hissedeceksiniz.
+
+Sadece lezzet değil, aynı zamanda güven ve şeffaflık da bizim için çok önemli.
+Hijyen, kalite standartları ve müşteri memnuniyeti, tüm çalışmalarımızın merkezinde yer alır.
+Restoranımızda geçirdiğiniz her anın, özel bir anı olarak kalmasını istiyoruz.
+Sevdiklerinizle paylaşacağınız keyifli dakikalar, bizim için en değerli başarıdır.
+
+
+--------------------------------------------------------------------------------
+
+INSERT INTO Services (Title, Description, IconUrl)
+VALUES
+('Lezzetin kalbinde buluşuyoruz', 'Tüm yemeklerimiz usta şeflerin elinden doğal ve katkısız ürünlerle hazırlanır.', 'aa'),
+('Tazeliğe verdiğimiz önem', 'Her gün taze temin edilen malzemelerle, sağlığınız ve damak zevkiniz ön plandadır.', 'aa'),
+('Sıcak servis, samimi ortam', 'Konforlu ortamımızda yemeklerinizi keyifle yiyin, kendinizi evinizde hissedin.', 'aa'),
+('Uygun fiyat, yüksek kalite', 'Yummy, her bütçeye uygun fiyatlarla lezzetli yemekleri sizlere sunar.', 'aa'),
+('Güler yüzlü hizmet anlayışı', 'Misafirlerimizi her zaman memnun edecek şekilde hizmet sunmak önceliğimizdir.', 'aa');
+
+
+--------------------------------------------------------------------------------
+
+INSERT INTO Categories (CategoryName)
+VALUES
+('Tatlılar'),
+('Yemekler'),
+('Salatalar'),
+('Çorbalar'),
+('İçecekler'),
+('Vejetaryen'),
+('Kahvaltılıklar'),
+('Izgaralar'),
+('Deniz Ürünleri'),
+('Atıştırmalıklar'),
+('Makarnalar'),
+('Pizzalar');
+
+--------------------------------------------------------------------------------
+INSERT INTO Products (ProductName, ProductDescription, Price, ImageUrl, CategoryId)
+VALUES
+-- Tatlılar (1)
+('Profiterol', 'Çikolata sosuyla kaplanmış nefis profiterol tatlısı', 120, 'aa', 1),
+('Cheesecake', 'Orman meyveli taze cheesecake', 140, 'aa', 1),
+
+-- Yemekler (2)
+('Izgara Tavuk', 'Özel baharatlarla marine edilmiş ızgara tavuk', 220, 'aa', 2),
+('Et Sote', 'Taze sebzelerle birlikte sotelenmiş dana eti', 280, 'aa', 2),
+
+-- Salatalar (3)
+('Sezar Salata', 'Tavuklu, parmesanlı klasik sezar salata', 160, 'aa', 3),
+('Akdeniz Salata', 'Zeytinyağlı ve taptaze sebzelerden oluşan hafif salata', 150, 'aa', 3),
+
+-- Çorbalar (4)
+('Mercimek Çorbası', 'Klasik Anadolu usulü mercimek çorbası', 90, 'aa', 4),
+('Domates Çorbası', 'Kaşar peynirli domates çorbası', 95, 'aa', 4),
+
+-- İçecekler (5)
+('Ev Yapımı Limonata', 'Taze limonlardan hazırlanmış ferahlatıcı limonata', 70, 'aa', 5),
+('Türk Kahvesi', 'Közde pişmiş geleneksel Türk kahvesi', 60, 'aa', 5),
+
+-- Vejetaryen (6)
+('Falafel Tabağı', 'Nohut köftesi, humus ve salata ile servis edilir', 200, 'aa', 6),
+('Vejetaryen Güveç', 'Taze sebzelerle fırında pişmiş güveç', 210, 'aa', 6),
+
+-- Kahvaltılıklar (7)
+('Serpme Kahvaltı', 'Peynir, zeytin, reçel ve sıcaklarla dolu geleneksel kahvaltı', 280, 'aa', 7),
+('Menemen', 'Domates, biber ve yumurta ile hazırlanan geleneksel tat', 120, 'aa', 7),
+
+-- Izgaralar (8)
+('Izgara Köfte', 'Dana kıymasından hazırlanan ızgara köfte', 230, 'aa', 8),
+('Kuzu Pirzola', 'Izgara kuzu pirzola, yanında garnitür', 350, 'aa', 8),
+
+-- Deniz Ürünleri (9)
+('Izgara Somon', 'Limon soslu ızgara somon', 340, 'aa', 9),
+('Karides Güveç', 'Özel soslu tereyağında pişmiş karides güveç', 360, 'aa', 9),
+
+-- Atıştırmalıklar (10)
+('Patates Kızartması', 'Kızarmış patates, yanında sos', 90, 'aa', 10),
+('Soğan Halkası', 'Kızartılmış çıtır soğan halkaları', 100, 'aa', 10),
+
+-- Makarnalar (11)
+('Spagetti Bolonez', 'Kıymalı bolonez soslu spagetti', 200, 'aa', 11),
+('Fettucini Alfredo', 'Kremalı mantarlı fettucini alfredo', 220, 'aa', 11),
+
+-- Pizzalar (12)
+('Margherita Pizza', 'Mozzarella, domates sos ve fesleğenli klasik pizza', 250, 'aa', 12),
+('Karışık Pizza', 'Sucuk, salam, mantar ve biberle hazırlanmış pizza', 280, 'aa', 12);
+
+
+--------------------------------------------------------------------------------
+INSERT INTO Testimonials (NameSurname, Title, Comment, ImageUrl)
+VALUES
+('Ayşe Demir', 'Gıda Mühendisi', 'Yemeklerin tazeliği ve lezzeti harikaydı. Uzun zamandır bu kadar keyifli bir akşam geçirmemiştim.', 'aa'),
+('Mehmet Yıldız', 'Avukat', 'Samimi atmosferi ve güler yüzlü hizmetiyle gerçekten fark yaratan bir mekan.', 'aa'),
+('Elif Korkmaz', 'Öğretmen', 'Çocuklarla birlikte geldik, hem onlar hem biz çok memnun kaldık. Menüde herkes için seçenek var.', 'aa'),
+('Can Özkan', 'Mühendis', 'Izgaralar tam kıvamında pişmişti, fiyat–performans dengesi çok başarılı.', 'aa'),
+('Zeynep Acar', 'Doktor', 'Tatlıları mutlaka denemelisiniz, özellikle cheesecake favorim oldu!', 'aa');
+
+
+--------------------------------------------------------------------------------
+INSERT INTO YummyEvents (Title, Description, ImageUrl, Status, Price)
+VALUES
+('Şefin Özel Gecesi', 'Usta şefimizin hazırladığı 5 farklı özel menü tadımı ile unutulmaz bir akşam yaşayın.', 'aa', 1, 750),
+('Canlı Müzik Akşamı', 'Hafta sonuna özel canlı müzik eşliğinde yemek keyfi.', 'aa', 1, 300),
+('Şarap & Peynir Tadımı', 'En seçkin şaraplar ve özel peynir çeşitleri ile keyifli bir deneyim.', 'aa', 1, 500),
+('Sevgililer Günü Menüsü', 'Romantik bir atmosferde çiftlere özel menü ve sürprizler.', 'aa', 1, 950),
+('Kahvaltı Brunch Etkinliği', 'Pazar gününe özel açık büfe serpme kahvaltı ve brunch etkinliği.', 'aa', 1, 350),
+('Doğum Günü Organizasyonu', 'Sevdikleriniz için özel süslemeler, doğum günü pastası ve kutlama menüsü.', 'aa', 1, 1200),
+('İş Yemeği & Toplantı', 'Kurumsal iş yemekleri ve toplantılar için özel hazırlanmış menüler ve VIP salon.', 'aa', 1, 1500),
+('Ramazan İftarı', 'Ramazan ayına özel iftar menüsü ve sınırsız çay ikramı.', 'aa', 1, 400),
+('Yılbaşı Özel Programı', 'Canlı müzik, özel yılbaşı menüsü ve sürprizlerle dolu eğlenceli bir gece.', 'aa', 1, 2000),
+('Dünya Mutfağı Haftası', 'Farklı ülkelerin en özel lezzetleriyle dolu bir hafta sizi bekliyor.', 'aa', 1, 800);
+
+
+--------------------------------------------------------------------------------
+INSERT INTO Chefs (NameSurname, Title, Description, ImageUrl)
+VALUES
+('Ahmet Kaya', 'Baş Şef', '20 yıllık mutfak deneyimiyle Türk ve dünya mutfaklarını ustalıkla harmanlayan baş şefimiz.', 'aa'),
+('Elif Demir', 'Pastane Şefi', 'Tatlı ve pastalarda uzman, özellikle cheesecake ve çikolatalı tatlılarıyla tanınır.', 'aa'),
+('Mehmet Yıldız', 'Izgara Ustası', 'Et ve ızgara yemeklerinde uzman, lezzet sırlarını yılların deneyimiyle sunuyor.', 'aa'),
+('Selin Arslan', 'Vejetaryen & Vegan Şef', 'Sebze ve bitki bazlı yemeklerde yaratıcı tarifleriyle öne çıkıyor.', 'aa'),
+('Canan Yüce', 'Deniz Ürünleri Şefi', 'Balık ve deniz ürünlerinde uzman, Akdeniz mutfağını sofralara taşıyor.', 'aa');
+
+
+--------------------------------------------------------------------------------
+
+INSERT INTO Reservations (NameSurname, Email, PhoneNumber, ReservationDate, ReservationTime, CountofPeople, Message, ReservationStatus)
+VALUES
+('Ahmet Demir', 'ahmetdemir@example.com', '05001112233', '2025-09-25', '19:30', 2, 'Eşimle akşam yemeği için rezervasyon yapmak istiyorum.', 'Onay Bekliyor'),
+('Elif Yılmaz', 'elifyilmaz@example.com', '05002223344', '2025-09-26', '20:00', 4, 'Doğum günü kutlaması için masa ayırabilir misiniz?', 'Onaylandı'),
+('Mehmet Kaya', 'mehmetkaya@example.com', '05003334455', '2025-09-27', '18:00', 3, 'Pencere kenarında masa rica ediyorum.', 'İptal Edildi'),
+('Zeynep Arslan', 'zeyneparslan@example.com', '05004445566', '2025-09-28', '21:00', 5, 'İş yemeği için sessiz bir alan ayırabilir misiniz?', 'Tamamlandı'),
+('Can Özkan', 'canozkan@example.com', '05005556677', '2025-09-29', '19:00', 2, 'Romantik bir akşam için küçük bir masa istiyoruz.', 'Gelmedi'),
+('Deniz Çelik', 'denizcelik@example.com', '05006667788', '2025-09-30', '20:30', 6, 'Arkadaş grubumuz için geniş masa rica ederiz.', 'Onay Bekliyor'),
+('Hülya Şahin', 'hulyasahin@example.com', '05007778899', '2025-10-01', '19:00', 2, 'Anneme doğum günü sürprizi yapacağız.', 'Onaylandı'),
+('Burak Yıldırım', 'burakyildirim@example.com', '05008889900', '2025-10-02', '20:00', 8, 'Şirket yemeği için rezervasyon yaptırmak istiyorum.', 'Tamamlandı'),
+('Selin Acar', 'selinacar@example.com', '05009990011', '2025-10-03', '18:30', 3, 'Glutensiz menü seçeneğiniz var mı?', 'Onay Bekliyor'),
+('Murat Koç', 'muratkoc@example.com', '05001112244', '2025-10-04', '21:00', 2, 'Deniz ürünleri menüsü için rezervasyon yaptırmak istiyoruz.', 'Onaylandı'),
+('Cansu Polat', 'cansupolat@example.com', '05002223355', '2025-10-05', '19:30', 5, 'Arkadaşlarla mezuniyet kutlaması yapacağız.', 'Onay Bekliyor'),
+('Kerem Aslan', 'keremaslan@example.com', '05003334466', '2025-10-06', '20:00', 4, 'Sessiz ve sakin bir masa istiyoruz.', 'İptal Edildi'),
+('Melis Kurt', 'meliskurt@example.com', '05004445577', '2025-10-07', '19:00', 3, 'Tatlı menünüzü özellikle denemek istiyoruz.', 'Onaylandı'),
+('Okan Erdem', 'okanerdem@example.com', '05005556688', '2025-10-08', '20:30', 7, 'Kalabalık arkadaş grubumuz için geniş masa lütfen.', 'Tamamlandı'),
+('İrem Aksoy', 'iremaksoy@example.com', '05006667799', '2025-10-09', '18:00', 2, 'Romantik akşam için mum ışığı olsun lütfen.', 'Onay Bekliyor'),
+('Tolga Uçar', 'tolgaucar@example.com', '05007778800', '2025-10-10', '19:30', 4, 'Şarap tadımı için geldik, rezervasyon yapıyoruz.', 'Onaylandı'),
+('Derya Efe', 'deryaefe@example.com', '05008889911', '2025-10-11', '20:00', 6, 'Aile yemeği için geniş masa rica ederiz.', 'Gelmedi'),
+('Emre Sezgin', 'emresezgin@example.com', '05009990022', '2025-10-12', '21:00', 2, 'Eşimle evlilik yıldönümümüz için rezervasyon.', 'Onaylandı'),
+('Gizem Yalçın', 'gizemyalcin@example.com', '05001113344', '2025-10-13', '19:00', 3, 'Menüde vegan seçenekler var mı?', 'Onay Bekliyor'),
+('Serkan Güneş', 'serkangunes@example.com', '05002224455', '2025-10-14', '20:30', 5, 'Doğum günü kutlaması için pasta istiyoruz.', 'Tamamlandı');
+
+
+INSERT INTO Reservations (NameSurname, Email, PhoneNumber, ReservationDate, ReservationTime, CountofPeople, Message, ReservationStatus)
+VALUES
+('Ayşe Karaca', 'aysekaraca@example.com', '05003335566', '2025-10-15', '19:00', 2, 'Arkadaşımın doğum günü için küçük masa rica ediyorum.', 'Onay Bekliyor'),
+('Mert Özdemir', 'mertozdemir@example.com', '05004446677', '2025-10-16', '20:00', 6, 'Kalabalık grup olarak geleceğiz, uygun masa ayırır mısınız?', 'Onaylandı'),
+('Seda Çetin', 'sedacetin@example.com', '05005557788', '2025-10-17', '18:30', 3, 'Vegan menü seçenekleri için bilgi almak istiyorum.', 'Tamamlandı'),
+('Ali Turan', 'alaturan@example.com', '05006668899', '2025-10-18', '19:30', 5, 'İş toplantısı için sessiz bir masa ayırabilir misiniz?', 'İptal Edildi'),
+('Nazan Yıldız', 'nazanyildiz@example.com', '05007779900', '2025-10-19', '21:00', 2, 'Romantik bir akşam yemeği için rezervasyon.', 'Onay Bekliyor'),
+('Furkan Kılıç', 'furkankilic@example.com', '05008880011', '2025-10-20', '20:00', 8, 'Şirket çalışanları ile yemek organizasyonu yapıyoruz.', 'Onaylandı'),
+('Buse Akın', 'buseakin@example.com', '05009991122', '2025-10-21', '19:00', 4, 'Pencere kenarı masa mümkünse ayırın lütfen.', 'Tamamlandı'),
+('Hakan Duman', 'hakanduman@example.com', '05001114455', '2025-10-22', '20:30', 3, 'Yemek sonrası tatlı için öneriniz var mı?', 'Onay Bekliyor'),
+('Yasemin Er', 'yaseminer@example.com', '05002225566', '2025-10-23', '18:00', 2, 'Kız kardeşimle kahvaltı için rezervasyon.', 'Onaylandı'),
+('Barış Kurt', 'bariskurt@example.com', '05003336677', '2025-10-24', '19:30', 6, 'Üniversite arkadaşlarımızla buluşma yapacağız.', 'Tamamlandı'),
+('Ece Koç', 'ecekoc@example.com', '05004447788', '2025-10-25', '20:00', 2, 'Sevgilimle yıldönümümüz için rezervasyon.', 'Onay Bekliyor'),
+('Tolga Tekin', 'tolgatekin@example.com', '05005558899', '2025-10-26', '19:00', 5, 'Çocuk menüsü var mı?', 'İptal Edildi'),
+('Hande Yalçın', 'handeyalcin@example.com', '05006669900', '2025-10-27', '21:00', 4, 'Tatlı menünüz çok ilgimizi çekti, rezervasyon yaptırıyoruz.', 'Onay Bekliyor'),
+('Umut Sezer', 'umutsezer@example.com', '05007770011', '2025-10-28', '20:00', 3, 'Ailemle birlikte geleceğiz, rahat bir masa rica ediyoruz.', 'Onaylandı'),
+('Cemre Ay', 'cemreay@example.com', '05008881122', '2025-10-29', '19:30', 7, 'Arkadaş grubumuzla kutlama yapacağız.', 'Tamamlandı'),
+('Kaan Kaplan', 'kaankaplan@example.com', '05009992233', '2025-10-30', '18:00', 2, 'Sessiz köşe masa istiyoruz.', 'Onay Bekliyor'),
+('Zehra Işık', 'zehraisik@example.com', '05001115544', '2025-10-31', '19:00', 5, 'Sürpriz doğum günü için masa ayarlayabilir misiniz?', 'Onaylandı'),
+('Ömer Çolak', 'omercolak@example.com', '05002226655', '2025-11-01', '20:30', 2, 'Romantik bir akşam yemeği için rezervasyon.', 'Tamamlandı'),
+('Gülşah Aydın', 'gulsahaydin@example.com', '05003337766', '2025-11-02', '21:00', 6, 'Arkadaşlarla kahkaha dolu bir akşam için rezervasyon.', 'Gelmedi'),
+('Levent Kara', 'leventkara@example.com', '05004448877', '2025-11-03', '19:30', 4, 'Ailemle birlikte doğum günü kutlaması yapacağız.', 'Onay Bekliyor');
+
+
+
+INSERT INTO Reservations (NameSurname, Email, PhoneNumber, ReservationDate, ReservationTime, CountofPeople, Message, ReservationStatus)
+VALUES
+('Nilay Güneş', 'nilaygunes@example.com', '05005559911', '2025-11-04', '20:00', 2, 'Arkadaşım ile uzun zamandır görüşmedik, sakin masa rica ediyoruz.', 'Onaylandı'),
+('Taylan Yavuz', 'taylanyavuz@example.com', '05006660022', '2025-11-05', '19:30', 5, 'Şirket ekibiyle yemek organizasyonu yapıyoruz.', 'Tamamlandı'),
+('Aslı Koçak', 'aslikocak@example.com', '05007771133', '2025-11-06', '18:30', 3, 'Vegan menü seçenekleri için rezervasyon.', 'Onay Bekliyor'),
+('Kemal Ekinci', 'kemalekinci@example.com', '05008882244', '2025-11-07', '20:00', 6, 'Aile toplantısı için geniş masa rica ediyoruz.', 'İptal Edildi'),
+('Sibel Arı', 'sibelari@example.com', '05009993355', '2025-11-08', '21:00', 2, 'Romantik akşam yemeği planlıyoruz.', 'Onay Bekliyor'),
+('Gökhan Can', 'gokhancan@example.com', '05001116677', '2025-11-09', '19:00', 4, 'Arkadaşlarla doğum günü kutlaması yapacağız.', 'Onaylandı'),
+('Meltem Usta', 'meltemusta@example.com', '05002227788', '2025-11-10', '20:30', 2, 'Evlilik yıldönümümüz için rezervasyon.', 'Tamamlandı'),
+('Orhan Tetik', 'orhantetik@example.com', '05003338899', '2025-11-11', '19:30', 7, 'Şirket toplantısı sonrası akşam yemeği.', 'Onay Bekliyor'),
+('Pelin Bayrak', 'pelinbayrak@example.com', '05004440011', '2025-11-12', '18:00', 3, 'Tatlı menüsünü denemek için geleceğiz.', 'Onaylandı'),
+('Cihan Bozkurt', 'cihanbozkurt@example.com', '05005551122', '2025-11-13', '20:00', 2, 'Sevgilimle birlikte özel masa ayırır mısınız?', 'Tamamlandı'),
+('Zeliha Polat', 'zelihapolat@example.com', '05006662233', '2025-11-14', '19:00', 4, 'Kızlarla buluşma için rezervasyon.', 'Onay Bekliyor'),
+('Taner Özkan', 'tanerozkan@example.com', '05007773344', '2025-11-15', '20:30', 5, 'Kalabalık aile yemeği planlıyoruz.', 'Onaylandı'),
+('Gamze Akyüz', 'gamzeakyuz@example.com', '05008884455', '2025-11-16', '21:00', 6, 'Arkadaş grubumuzla eğlenceli akşam planlıyoruz.', 'Gelmedi'),
+('Halil Sarı', 'halilsari@example.com', '05009995566', '2025-11-17', '19:30', 2, 'Sessiz köşe masa rica ediyoruz.', 'Onay Bekliyor'),
+('Ceyda Acar', 'ceydaacar@example.com', '05001117788', '2025-11-18', '20:00', 8, 'Şirket departman yemeği için masa ayırır mısınız?', 'Onaylandı'),
+('Arda İnce', 'ardaince@example.com', '05002228899', '2025-11-19', '18:30', 3, 'Tatlılardan özellikle cheesecake denemek istiyoruz.', 'Tamamlandı'),
+('Songül Kaya', 'songulkaya@example.com', '05003339900', '2025-11-20', '19:00', 4, 'Ailecek akşam yemeği için rezervasyon.', 'Onay Bekliyor'),
+('Ferhat Demirtaş', 'ferhatdemirtas@example.com', '05004441122', '2025-11-21', '20:30', 2, 'Eşimle özel akşam yemeği için masa istiyoruz.', 'Onaylandı'),
+('Müge Şen', 'mugesen@example.com', '05005552233', '2025-11-22', '21:00', 5, 'Kız arkadaş grubumuzla kutlama yapacağız.', 'İptal Edildi'),
+('Alper Güven', 'alperguven@example.com', '05006663344', '2025-11-23', '19:30', 2, 'Romantik bir akşam planlıyoruz.', 'Onay Bekliyor');
+
+
+INSERT INTO Reservations (NameSurname, Email, PhoneNumber, ReservationDate, ReservationTime, CountofPeople, Message, ReservationStatus)
+VALUES
+('Sevgi Doğan', 'sevgidogan@example.com', '05007774455', '2025-11-24', '20:00', 3, 'Kardeşimle birlikte akşam yemeği için masa rica ediyoruz.', 'Onay Bekliyor'),
+('Tolga Alkan', 'tolgaalkan@example.com', '05008885566', '2025-11-25', '19:30', 5, 'Arkadaş grubumuzla kutlama yapacağız.', 'Onaylandı'),
+('Nazlı Kurtuluş', 'nazlikurtulus@example.com', '05009996677', '2025-11-26', '18:30', 2, 'Romantik bir masa rica ediyoruz.', 'Tamamlandı'),
+('Yusuf Erdem', 'yusuferdem@example.com', '05001118899', '2025-11-27', '20:00', 6, 'Şirket yemeği için geniş masa istiyoruz.', 'İptal Edildi'),
+('Selma Karahan', 'selmakarahan@example.com', '05002229900', '2025-11-28', '21:00', 4, 'Ailecek akşam yemeği için rezervasyon.', 'Onay Bekliyor'),
+('İsmail Tetik', 'ismailtetik@example.com', '05003330011', '2025-11-29', '19:00', 2, 'Sevgilimle yıldönümümüz için masa rica ediyoruz.', 'Onaylandı'),
+('Ebru Yıldırım', 'ebruyildirim@example.com', '05004441122', '2025-11-30', '20:30', 3, 'Arkadaşlarımızla keyifli bir akşam için rezervasyon.', 'Tamamlandı'),
+('Berk Demirci', 'berkdemirci@example.com', '05005552233', '2025-12-01', '19:30', 7, 'Mezuniyet kutlaması için masa rica ediyoruz.', 'Onay Bekliyor'),
+('Esra Gök', 'esragok@example.com', '05006663344', '2025-12-02', '18:00', 2, 'Pencere kenarında masa lütfen.', 'Onaylandı'),
+('Kadir Uzun', 'kadiruzun@example.com', '05007774455', '2025-12-03', '20:00', 4, 'İş toplantısı sonrası yemek için masa ayırın.', 'Tamamlandı'),
+('Nihal Yüksel', 'nihalyuksel@example.com', '05008885566', '2025-12-04', '19:00', 6, 'Aile buluşması için masa ayırın.', 'Onay Bekliyor'),
+('Emin Kaya', 'eminkaya@example.com', '05009996677', '2025-12-05', '20:30', 2, 'Sevgilimle özel günümüz için masa istiyoruz.', 'Onaylandı'),
+('Yeliz Duran', 'yelizduran@example.com', '05001119988', '2025-12-06', '21:00', 5, 'Kız arkadaş grubumuzla eğlenceli bir akşam planlıyoruz.', 'Gelmedi'),
+('Cengiz Çolak', 'cengizcolak@example.com', '05002220099', '2025-12-07', '19:30', 3, 'Sessiz köşe masa rica ediyoruz.', 'Onay Bekliyor'),
+('Aylin Öztürk', 'aylinozturk@example.com', '05003331100', '2025-12-08', '20:00', 2, 'Tatlı menünüzü denemek için rezervasyon.', 'Onaylandı'),
+('Murat Çetin', 'muratcetin@example.com', '05004442211', '2025-12-09', '19:00', 4, 'Ailemle birlikte doğum günü kutlaması yapacağız.', 'Tamamlandı'),
+('Gonca Polat', 'goncapolis@example.com', '05005553322', '2025-12-10', '20:30', 2, 'Romantik bir akşam için rezervasyon.', 'Onay Bekliyor'),
+('Samet Öz', 'sametoz@example.com', '05006664433', '2025-12-11', '21:00', 8, 'Şirket departman yemeği için masa ayırır mısınız?', 'Onaylandı'),
+('Hazal Yıldız', 'hazalyildiz@example.com', '05007775544', '2025-12-12', '19:30', 2, 'Yılbaşı öncesi arkadaşlarla yemek için masa istiyoruz.', 'Tamamlandı'),
+('Volkan Acar', 'volkanacar@example.com', '05008886655', '2025-12-13', '20:00', 6, 'Kalabalık aile yemeği için rezervasyon.', 'İptal Edildi');
+
+
+--------------------------------------------------------------------------------

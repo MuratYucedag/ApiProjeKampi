@@ -1,0 +1,48 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+public class EmployeeTask
+{
+    [Key]
+    public int EmployeeTaskId { get; set; }
+    public string TaskName { get; set; }
+    public byte TaskStatusValue { get; set; }
+    public DateTime AssignDate { get; set; }
+    public DateTime DueDate { get; set; }
+    public string Priority { get; set; }
+    public string TaskStatus { get; set; }
+
+    // Many-to-many navigation
+    public List<EmployeeTaskChef> EmployeeTaskChefs { get; set; }
+}
+
+public class Chef
+{
+    [Key]
+    public int ChefId { get; set; }
+    public string NameSurname { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string ImageUrl { get; set; }
+
+    // Many-to-many navigation
+    public List<EmployeeTaskChef> EmployeeTaskChefs { get; set; }
+}
+
+// Ara tablo
+public class EmployeeTaskChef
+{
+    [Key]
+    public int Id { get; set; }   // Primary Key (tek kolon) – kolaylık olsun diye ekledim
+
+    [ForeignKey("EmployeeTask")]
+    public int EmployeeTaskId { get; set; }
+    public EmployeeTask EmployeeTask { get; set; }
+
+    [ForeignKey("Chef")]
+    public int ChefId { get; set; }
+    public Chef Chef { get; set; }
+
+    // Ek alan istersen buraya ekle
+    public string RoleInTask { get; set; } 
+}
