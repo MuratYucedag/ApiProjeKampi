@@ -2,10 +2,8 @@
 
 <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
 
-  
-
-    <div class="tab-pane fade active show" id="menu-starters">
-
+    <!-- Tüm Menü -->
+    <div class="tab-pane fade active show" id="menu-all">
         <div class="tab-header text-center">
             <p>Menü</p>
             <h3>Tüm Lezzetler</h3>
@@ -15,25 +13,39 @@
             @foreach (var item in Model)
             {
                 <div class="col-lg-4 menu-item">
-                    <a href="@item.ImageUrl" class="glightbox"><img src="@item.ImageUrl" class="menu-img img-fluid" alt=""></a>
+                    <a href="@item.ImageUrl" class="glightbox">
+                        <img src="@item.ImageUrl" class="menu-img img-fluid" alt="" style="height:250px; width:500px;">
+                    </a>
                     <h4>@item.ProductName</h4>
-                    <p class="ingredients">
-                        @item.ProductDescription
-                    </p>
-                    <p class="price">
-                        @item.Price ₺
-                    </p>
+                    <p class="ingredients">@item.ProductDescription</p>
+                    <p class="price">@item.Price ₺</p>
                 </div>
-
-                <!-- Menu Item -->
             }
-           
-
-
-
         </div>
-    </div><!-- End Starter Menu Content -->
+    </div>
 
+    <!-- Kategori Bazlı Menü -->
+    @foreach (var categoryId in Model.Select(x => x.CategoryId).Distinct())
+    {
+        <div class="tab-pane fade" id="menu-@categoryId">
+            <div class="tab-header text-center">
+                <p>Menü</p>
+                <h3>@Model.First(x => x.CategoryId == categoryId).CategoryName</h3>
+            </div>
 
-
+            <div class="row gy-5">
+                @foreach (var item in Model.Where(x => x.CategoryId == categoryId))
+                {
+                    <div class="col-lg-4 menu-item">
+                        <a href="@item.ImageUrl" class="glightbox">
+                            <img src="@item.ImageUrl" class="menu-img img-fluid" alt="" style="height:250px; width:500px;">
+                        </a>
+                        <h4>@item.ProductName</h4>
+                        <p class="ingredients">@item.ProductDescription</p>
+                        <p class="price">@item.Price ₺</p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>

@@ -1,19 +1,18 @@
 ﻿@model List<ApiProjeKampi.WebUI.Dtos.CategoryDtos.ResultCategoryDto>
 
 <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-
     <li class="nav-item">
-        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-all">
             <h4>Tüm Menü</h4>
         </a>
-    </li><!-- End tab nav item -->
+    </li>
 
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-@item.CategoryId">
                 <h4>@item.CategoryName</h4>
-            </a><!-- End tab nav item -->
+            </a>
         </li>
     }
 </ul>
