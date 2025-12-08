@@ -1,0 +1,253 @@
+﻿ // 1) Ürün listesini kendi API'nden çek
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7020/api/Products/ProductListWithCategory");
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                // API hata verirse boş liste gönder
+                return View(new List<AIDailyMenuSuggestionItem>());
+            }
+
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var products = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsonData);
+
+            if (products == null || !products.Any())
+            {
+                return View(new List<AIDailyMenuSuggestionItem>());
+            }
+
+            // 2) AI'ya daha sade bir liste gönderelim (ID, Name, Category, Price)
+            // Buradaki property isimlerini kendi ResultProductDto'na göre ayarla!!!
+            var simplifiedProducts = products.Select(x => new
+            {
+                ProductId = x.ProductID,          // Örn: x.ProductId veya x.Id olabilir
+                Name = x.ProductName,            // Örn: x.Name
+                Category = x.CategoryName,       // Örn: x.Category.CategoryName
+                Price = x.Price
+            }).ToList();
+
+            string productsJson = JsonConvert.SerializeObject(simplifiedProducts);
+
+            // 3) Prompt metni
+            var sb = new StringBuilder();
+            sb.AppendLine("Sen bir restoran için menü planlayan akıllı bir şefsin.");
+            sb.AppendLine("Aşağıda restoranın ürün listesi JSON formatında verilmiştir.");
+            sb.AppendLine("Bu listeden GÜNÜN MENÜSÜ için 4 tane ürün seç.");
+            sb.AppendLine();
+            sb.AppendLine("Kurallar:");
+            sb.AppendLine("- Sadece verilen listeden seçim yap, yeni ürün uydurma.");
+            sb.AppendLine("- Menü dengeli olsun (mümkünse çorba + ana yemek + yan/aperatif + tatlı).");
+            sb.AppendLine("- Fiyat-performans dengeli olsun.");
+            sb.AppendLine("- Cevabın SADECE geçerli bir JSON array olsun, ekstra açıklama yazma.");
+            sb.AppendLine();
+            sb.AppendLine("Ürün listesi JSON:");
+            sb.AppendLine(productsJson);
+            sb.AppendLine();
+            sb.AppendLine(@"Cevap formatın tam olarak şöyle olsun (örnek):
+[
+  {
+    ""ProductId"": 1,
+    ""Name"": ""Mercimek Çorbası"",
+    ""Category"": ""Çorbalar"",
+    ""Price"": 80.0,
+    ""Reason"": ""Günün menüsünde hafif ve sıcak bir başlangıç olarak uygun.""
+  },
+  {
+    ""ProductId"": 5,
+    ""Name"": ""Izgara Köfte"",
+    ""Category"": ""Ana Yemekler"",
+    ""Price"": 220.0,
+    ""Reason"": ""Ana yemek olarak en çok tercih edilen ve doyurucu bir seçenek.""
+  }
+]");
+
+            string prompt = sb.ToString();
+
+            // 4) OpenAI'ye istek atmak için yeni bir HttpClient oluşturalım
+            var openAiClient = _httpClientFactory.CreateClient();
+            openAiClient.BaseAddress = new Uri("https://api.openai.com/");
+            openAiClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", OPENAI_API_KEY);
+
+            var requestBody = new
+            {
+                model = "gpt-4.1-mini", // İstersen model adını değiştir
+                messages = new[]
+                {
+                    new
+                    {
+                        role = "system",
+                        content = "Sen sadece JSON üreten bir RESTAURANT MENU ASISTANI'sın. Sadece geçerli JSON ile cevap ver."
+                    },
+                    new
+                    {
+                        role = "user",
+                        content = prompt
+                    }
+                }
+            };
+
+            var requestJson = JsonConvert.SerializeObject(requestBody);
+            var httpContent = new StringContent(requestJson, Encoding.UTF8, "application/json");
+
+            var openAiResponse = await openAiClient.PostAsync("v1/chat/completions", httpContent);
+            if (!openAiResponse.IsSuccessStatusCode)
+            {
+                // OpenAI başarısızsa boş liste
+                return View(new List<AIDailyMenuSuggestionItem>());
+            }
+
+            var openAiResponseJson = await openAiResponse.Content.ReadAsStringAsync();
+
+            // 5) OpenAI cevabından message.content içindeki JSON'u çek
+            dynamic openAiObject = JsonConvert.DeserializeObject(openAiResponseJson);
+            string aiContent = openAiObject.choices[0].message.content.ToString();
+
+            // 6) AI JSON'unu model listesine çevir
+            List<AIDailyMenuSuggestionItem> suggestions;
+            try
+            {
+                suggestions = JsonConvert.DeserializeObject<List<AIDailyMenuSuggestionItem>>(aiContent)
+                              ?? new List<AIDailyMenuSuggestionItem>();
+            }
+            catch
+            {
+                // JSON parse patlarsa boş liste dön
+                suggestions = new List<AIDailyMenuSuggestionItem>();
+            }
+
+            // 7) View'e modeli gönder
+            return View(suggestions);
+        }
+
+
+ -------------------------------------------------------------------------------
+
+
+   var openAiClient = _httpClientFactory.CreateClient();
+        openAiClient.BaseAddress = new Uri("https://api.openai.com/");
+        openAiClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", OPENAI_API_KEY);
+
+        string prompt = @"
+Aşağıdaki formatta rastgele 4 farklı dünya mutfağından (ör: Çin, İtalyan, Türk, Hint, Japon, Fransız, Meksika...) 
+her biri için günlük bir menü oluştur.
+
+Kurallar:
+- 4 farklı ülke mutfağı olacak.
+- Ülkeleri rastgele seç.
+- Her mutfağın içinde 4 yemek olsun (çorba, ana yemek, yan yemek, tatlı gibi).
+- Her yemeğe kısa bir açıklama ve fiyat önerisi ekle.
+- Cevap sadece geçerli bir JSON olsun, ek açıklama verme.
+
+JSON formatı tam olarak şöyle olsun:
+
+[
+  {
+    ""Cuisine"": ""Italian"",
+    ""MenuTitle"": ""Authentic Italian Daily Menu"",
+    ""Items"": [
+      { ""Name"": ""Soup Name"", ""Description"": ""..."", ""Price"": 10 },
+      { ""Name"": ""Main Dish"", ""Description"": ""..."", ""Price"": 20 },
+      { ""Name"": ""Side Dish"", ""Description"": ""..."", ""Price"": 8 },
+      { ""Name"": ""Dessert"", ""Description"": ""..."", ""Price"": 7 }
+    ]
+  }
+]
+";
+
+        var body = new
+        {
+            model = "gpt-4.1-mini",   // istersen değiştir
+            messages = new[]
+            {
+                new { role = "system", content = "Sadece JSON üret." },
+                new { role = "user", content = prompt }
+            }
+        };
+
+        var jsonBody = JsonConvert.SerializeObject(body);
+        var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+        var response = await openAiClient.PostAsync("v1/chat/completions", content);
+        var responseJson = await response.Content.ReadAsStringAsync();
+
+        dynamic obj = JsonConvert.DeserializeObject(responseJson);
+        string aiContent = obj.choices[0].message.content.ToString();
+
+        List<MenuSuggestionDto> menus;
+
+        try
+        {
+            menus = JsonConvert.DeserializeObject<List<MenuSuggestionDto>>(aiContent);
+        }
+        catch
+        {
+            menus = new();
+        }
+
+        return View(menus);
+    }
+
+
+-----------------------------------------------------------------------------------
+
+string prompt = @"
+4 farklı dünya mutfağından rastgele günlük menü üret.
+
+Kurallar:
+- Mutlaka 4 farklı ülke mutfağı seç.
+- Tüm içerik TÜRKÇE olsun.
+- Her ülke için 4 yemek yaz (çorba, ana yemek, yan yemek, tatlı).
+- Yemek açıklamaları Türkçe olsun.
+- Fiyatları TL cinsinden ver.
+- Ülke adını Türkçe yaz (İtalyan Mutfağı, Çin Mutfağı gibi).
+- Ayrıca her mutfağa ISO ülke kodunu ekle (IT, CN, TR, JP, FR vs.)
+- Cevap SADECE geçerli JSON olsun.
+
+JSON formatı TAM OLARAK şöyle olsun:
+
+[
+  {
+    ""Cuisine"": ""İtalyan Mutfağı"",
+    ""CountryCode"": ""IT"",
+    ""MenuTitle"": ""Geleneksel İtalyan Günlük Menüsü"",
+    ""Items"": [
+      { ""Name"": ""Minestrone Çorbası"", ""Description"": ""Sebzeli geleneksel çorba"", ""Price"": 85 },
+      { ""Name"": ""Spaghetti Carbonara"", ""Description"": ""Özel soslu makarna"", ""Price"": 180 },
+      { ""Name"": ""Sarımsaklı Ekmek"", ""Description"": ""Tereyağlı kızarmış ekmek"", ""Price"": 45 },
+      { ""Name"": ""Tiramisu"", ""Description"": ""Kakao aromalı tatlı"", ""Price"": 70 }
+    ]
+  }
+]
+";
+
+------------------------------------------------------------------
+
+4 farklı dünya mutfağından tamamen rastgele günlük menü oluştur.
+
+ÖNEMLİ KURALLAR:
+- Mutlaka 4 FARKLI ülke mutfağı seç.
+- Daha önce seçtiğin mutfakları tekrar etme (iç mantığında çeşitlilik üret).
+- Popüler olmayan mutfaklardan da seçebilirsin (örneğin Peru, Tayland, Fas, İran, Kore, Şili, Portekiz, Endonezya, Lübnan vb.).
+- Ülkeleri HER SEFERİNDE FARKLI seç.
+- Tüm içerik TÜRKÇE olacak.
+- Ülke adını Türkçe yaz (ör: “Peru Mutfağı”).
+- ISO Country Code zorunlu (ör: PE, TH, MA, IR, KR vb.)
+- Örnek vermiyorum, tamamen özgün üret.
+- Cevap sadece geçerli JSON olsun.
+
+JSON formatı:
+[
+  {
+    "Cuisine": "X Mutfağı",
+    "CountryCode": "XX",
+    "MenuTitle": "Günlük Menü",
+    "Items": [
+      { "Name": "Yemek 1", "Description": "Açıklama", "Price": 100 },
+      { "Name": "Yemek 2", "Description": "Açıklama", "Price": 120 },
+      { "Name": "Yemek 3", "Description": "Açıklama", "Price": 90 },
+      { "Name": "Yemek 4", "Description": "Açıklama", "Price": 70 }
+    ]
+  }
+]
