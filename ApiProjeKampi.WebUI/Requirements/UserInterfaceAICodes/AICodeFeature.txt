@@ -11,48 +11,48 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         border: none;
     }
-
+    
     .modern-table {
         border-collapse: separate;
         border-spacing: 0;
     }
-
-        .modern-table thead th {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
-            color: #667eea;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-            padding: 1rem;
-            border: none;
-            border-bottom: 2px solid #667eea;
-        }
-
-            .modern-table thead th:first-child {
-                border-top-left-radius: 10px;
-            }
-
-            .modern-table thead th:last-child {
-                border-top-right-radius: 10px;
-            }
-
-        .modern-table tbody tr {
-            transition: all 0.3s ease;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-            .modern-table tbody tr:hover {
-                background-color: #f8f9ff;
-                transform: scale(1.01);
-                box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-            }
-
-        .modern-table tbody td {
-            padding: 1rem;
-            vertical-align: middle;
-        }
-
+    
+    .modern-table thead th {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+        color: #667eea;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+        border: none;
+        border-bottom: 2px solid #667eea;
+    }
+    
+    .modern-table thead th:first-child {
+        border-top-left-radius: 10px;
+    }
+    
+    .modern-table thead th:last-child {
+        border-top-right-radius: 10px;
+    }
+    
+    .modern-table tbody tr {
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .modern-table tbody tr:hover {
+        background-color: #f8f9ff;
+        transform: scale(1.01);
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    }
+    
+    .modern-table tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+    }
+    
     .feature-icon {
         width: 45px;
         height: 45px;
@@ -64,7 +64,7 @@
         color: white;
         font-size: 1.2rem;
     }
-
+    
     .title-badge {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
@@ -74,20 +74,20 @@
         font-weight: 600;
         display: inline-block;
     }
-
+    
     .subtitle-text {
         color: #666;
         font-size: 0.9rem;
         font-style: italic;
     }
-
+    
     .description-text {
         color: #555;
         font-size: 0.9rem;
         line-height: 1.5;
         max-width: 400px;
     }
-
+    
     .modern-btn {
         padding: 0.5rem 1rem;
         border-radius: 8px;
@@ -99,34 +99,34 @@
         align-items: center;
         gap: 0.5rem;
     }
-
-        .modern-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
+    
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
     .btn-edit {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
     }
-
+    
     .btn-delete {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
     }
-
+    
     .btn-view {
         background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         color: white;
     }
-
+    
     .btn-create {
         background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         color: white;
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
     }
-
+    
     .btn-disabled {
         background: linear-gradient(135deg, #d7d7d7 0%, #a8a8a8 100%);
         color: white;
@@ -135,7 +135,7 @@
         cursor: not-allowed;
         opacity: 0.7;
     }
-
+    
     .alert-info-custom {
         background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
         border: 2px solid #4dd0e1;
@@ -236,7 +236,7 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        
                         @if (Model.Count == 1)
                         {
                             <div style="padding: 1rem;">
@@ -260,3 +260,7 @@
         </div>
     </div>
 </section>
+
+
+-----------------------------------------------------------------
+

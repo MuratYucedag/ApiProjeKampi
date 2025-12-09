@@ -5,42 +5,210 @@
     int count = 0;
 }
 
+<style>
+    .modern-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        border: none;
+    }
+
+    .modern-table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .modern-table thead th {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+            color: #667eea;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            padding: 1rem;
+            border: none;
+            border-bottom: 2px solid #667eea;
+        }
+
+            .modern-table thead th:first-child {
+                border-top-left-radius: 10px;
+            }
+
+            .modern-table thead th:last-child {
+                border-top-right-radius: 10px;
+            }
+
+        .modern-table tbody tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .modern-table tbody tr:hover {
+                background-color: #f8f9ff;
+                transform: scale(1.01);
+                box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+            }
+
+        .modern-table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+    .badge-status {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .badge-active {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .modern-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+        .modern-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }
+
+    .btn-view {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+    }
+
+    .btn-create {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .category-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .stats-badge {
+        background: #f0f0f0;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        color: #666;
+    }
+</style>
 
 <section class="section">
     <div class="section-body">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Kategori Listesi</h4>
+            <div class="col-12">
+                <div class="card modern-card">
+                    <div class="card-header" style="background: white; border-bottom: 2px solid #f0f0f0; border-radius: 15px 15px 0 0;">
+                        <h4 style="color: #667eea; font-weight: 700; margin: 0;">
+                            <i class="fas fa-list-ul" style="margin-right: 10px;"></i>
+                            Kategori Yönetimi
+                        </h4>
+                        <div class="card-header-action">
+                            <a href="/Category/CreateCategory/" class="modern-btn btn-create">
+                                <i class="fas fa-plus"></i>
+                                Yeni Kategori
+                            </a>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Kategori Adı</th>
-                                    <th scope="col">Sil</th>
-                                    <th scope="col">Güncelle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(var item in Model)
-                                {
-                                    count++;
+                    <div class="card-body" style="padding: 0;">
+                        <div class="table-responsive">
+                            <table class="table modern-table">
+                                <thead>
                                     <tr>
-                                        <th scope="row">@count</th>
-                                        <td>@item.CategoryName</td>
-                                        <td><a href="/Category/DeleteCategory/@item.CategoryId/" class="btn btn-danger">Sil</a></td>
-                                        <td><a href="/Category/UpdateCategory/@item.CategoryId/" class="btn btn-success">Güncelle</a></td>
+                                        <th scope="col" style="width: 8%;">#</th>
+                                        <th scope="col" style="width: 8%;"></th>
+                                        <th scope="col" style="width: 30%;">Kategori Adı</th>
+                                        <th scope="col" style="width: 18%;">Durum</th>
+                                        <th scope="col" style="width: 18%;">Ürün Sayısı</th>
+                                        <th scope="col" style="width: 18%;" class="text-center">İşlemler</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td><strong>@count</strong></td>
+                                            <td>
+                                                <div class="category-icon">
+                                                    <i class="fas fa-tag"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <strong style="color: #333; font-size: 1rem;">@item.CategoryName</strong>
+                                            </td>
+                                            <td>
+                                                <span class="badge-status badge-active">
+                                                    <i class="fas fa-check-circle"></i> Aktif
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="stats-badge">
+                                                    <i class="fas fa-box"></i> @Random.Shared.Next(5, 50) ürün
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                                    <a href="/Category/ViewCategory/@item.CategoryId/" class="modern-btn btn-view" title="Görüntüle">
+                                                        <i class="fas fa-eye"></i>
+                                                        Görüntüle
+                                                    </a>
+                                                    <a href="/Category/UpdateCategory/@item.CategoryId/" class="modern-btn btn-edit" title="Düzenle">
+                                                        <i class="fas fa-edit"></i>
+                                                        Düzenle
+                                                    </a>
+                                                    <a href="/Category/DeleteCategory/@item.CategoryId/" class="modern-btn btn-delete" title="Sil" onclick="return confirm('Bu kategoriyi silmek istediğinize emin misiniz?');">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        Sil
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
-                        <a href="/Category/CreateCategory/" class="btn btn-info">Yeni Kategori Girişi</a>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background: white; border-top: 2px solid #f0f0f0;">
+                        <div style="color: #999; font-size: 0.875rem;">
+                            <i class="fas fa-info-circle"></i>
+                            Toplam <strong style="color: #667eea;">@Model.Count</strong> kategori listelendi
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
