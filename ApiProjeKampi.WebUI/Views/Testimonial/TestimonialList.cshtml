@@ -1,47 +1,258 @@
 ﻿@model List<ResultTestimonialDto>
-
 @{
     ViewData["Title"] = "TestimonialList";
     Layout = "~/Views/AdminLayout/Index.cshtml";
     int count = 0;
 }
 
+<style>
+    .modern-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        border: none;
+    }
+
+    .modern-table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .modern-table thead th {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+            color: #667eea;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            padding: 1rem;
+            border: none;
+            border-bottom: 2px solid #667eea;
+        }
+
+            .modern-table thead th:first-child {
+                border-top-left-radius: 10px;
+            }
+
+            .modern-table thead th:last-child {
+                border-top-right-radius: 10px;
+            }
+
+        .modern-table tbody tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .modern-table tbody tr:hover {
+                background-color: #f8f9ff;
+                transform: scale(1.01);
+                box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+            }
+
+        .modern-table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+    .customer-avatar {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .customer-number {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    .customer-name {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .customer-title {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 0.3rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    .comment-box {
+        background: #fffbf0;
+        border-left: 4px solid #ffa726;
+        padding: 0.8rem;
+        border-radius: 8px;
+        color: #555;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        font-style: italic;
+        max-width: 500px;
+        position: relative;
+    }
+
+        .comment-box:before {
+            content: '"';
+            font-size: 2rem;
+            color: #ffa726;
+            position: absolute;
+            top: -5px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+    .rating-stars {
+        color: #ffa726;
+        font-size: 0.9rem;
+        margin-top: 0.3rem;
+    }
+
+    .modern-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+        .modern-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }
+
+    .btn-view {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+    }
+
+    .btn-create {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+</style>
+
 <section class="section">
     <div class="section-body">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Müşteri Yorumları Listesi</h4>
+            <div class="col-12">
+                <div class="card modern-card">
+                    <div class="card-header" style="background: white; border-bottom: 2px solid #f0f0f0; border-radius: 15px 15px 0 0;">
+                        <h4 style="color: #667eea; font-weight: 700; margin: 0;">
+                            <i class="fas fa-comments" style="margin-right: 10px;"></i>
+                            Müşteri Yorumları Listesi
+                        </h4>
+                        <div class="card-header-action">
+                            <a href="/Testimonial/CreateTestimonial/" class="modern-btn btn-create">
+                                <i class="fas fa-plus"></i>
+                                Yeni Yorum Ekle
+                            </a>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Müşteri Adı</th>
-                                    <th scope="col">Müşteri Unvan</th>
-                                    <th scope="col">Müşteri Yorumu</th>
-                                    <th scope="col">Sil</th>
-                                    <th scope="col">Güncelle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    count++;
+                    <div class="card-body" style="padding: 0;">
+                        <div class="table-responsive">
+                            <table class="table modern-table">
+                                <thead>
                                     <tr>
-                                        <th scope="row">@count</th>
-                                        <td>@item.nameSurname</td>
-                                        <td>@item.title</td>
-                                        <td>@item.comment</td>
-                                        <td><a href="/Testimonial/DeleteTestimonial/@item.testimonialId/" class="btn btn-danger">Sil</a></td>
-                                        <td><a href="/Testimonial/UpdateTestimonial/@item.testimonialId/" class="btn btn-success">Güncelle</a></td>
+                                        <th scope="col" style="width: 5%;">#</th>
+                                        <th scope="col" style="width: 15%;">Müşteri Adı</th>
+                                        <th scope="col" style="width: 12%;">Unvan</th>
+                                        <th scope="col" style="width: 40%;">Yorum</th>
+                                        <th scope="col" style="width: 23%;" class="text-center">İşlemler</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-                        <a href="/Testimonial/CreateTestimonial/" class="btn btn-info">Yeni Yorum Girişi</a>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>
+                                                <div class="customer-number">
+                                                    @count
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="customer-name">
+                                                    <i class="fas fa-user" style="color: #667eea; margin-right: 5px;"></i>
+                                                    @item.nameSurname
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="customer-title">
+                                                    <i class="fas fa-briefcase"></i> @item.title
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <div class="comment-box">
+                                                    @item.comment
+                                                </div>
+                                                <div class="rating-stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                                    <a href="/Testimonial/ViewTestimonial/@item.testimonialId/" class="modern-btn btn-view" title="Görüntüle">
+                                                        <i class="fas fa-eye"></i>
+                                                        Görüntüle
+                                                    </a>
+                                                    <a href="/Testimonial/UpdateTestimonial/@item.testimonialId/" class="modern-btn btn-edit" title="Düzenle">
+                                                        <i class="fas fa-edit"></i>
+                                                        Düzenle
+                                                    </a>
+                                                    <a href="/Testimonial/DeleteTestimonial/@item.testimonialId/" class="modern-btn btn-delete" title="Sil" onclick="return confirm('Bu yorumu silmek istediğinize emin misiniz?');">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        Sil
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background: white; border-top: 2px solid #f0f0f0;">
+                        <div style="color: #999; font-size: 0.875rem;">
+                            <i class="fas fa-info-circle"></i>
+                            Toplam <strong style="color: #667eea;">@Model.Count</strong> müşteri yorumu listelendi
+                        </div>
                     </div>
                 </div>
             </div>

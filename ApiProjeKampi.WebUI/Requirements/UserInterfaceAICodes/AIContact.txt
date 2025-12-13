@@ -1,0 +1,618 @@
+﻿@model List<ResultContactDto>
+@{
+    ViewData["Title"] = "ContactList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .modern-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        border: none;
+    }
+    
+    .contact-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .contact-info-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+    }
+    
+    .contact-card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1.2rem;
+        color: white;
+    }
+    
+    .contact-card-header h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .contact-card-body {
+        padding: 1.5rem;
+    }
+    
+    .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9ff;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-info-item:hover {
+        background: #e8ecff;
+        transform: translateX(5px);
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    
+    .contact-info-content {
+        flex: 1;
+    }
+    
+    .contact-info-label {
+        font-size: 0.75rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+    }
+    
+    .contact-info-value {
+        color: #333;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+    
+    .contact-actions {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        display: flex;
+        gap: 0.75rem;
+    }
+    
+    .modern-btn {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+    
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .btn-delete {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }
+    
+    .btn-create {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #999;
+        grid-column: 1 / -1;
+    }
+    
+    .empty-state i {
+        font-size: 4rem;
+        color: #ddd;
+        margin-bottom: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-cards-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card modern-card">
+                    <div class="card-header" style="background: white; border-bottom: 2px solid #f0f0f0; border-radius: 15px 15px 0 0;">
+                        <h4 style="color: #667eea; font-weight: 700; margin: 0;">
+                            <i class="fas fa-address-book" style="margin-right: 10px;"></i>
+                            İletişim Bilgileri Listesi
+                        </h4>
+                        <div class="card-header-action">
+                            <a href="/Contact/CreateContact/" class="modern-btn btn-create">
+                                <i class="fas fa-plus"></i>
+                                Yeni İletişim Bilgisi Ekle
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        @if (Model.Count > 0)
+                        {
+                            <div class="contact-cards-grid">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="contact-info-card">
+                                        <div class="contact-card-header">
+                                            <h5>
+                                                <i class="fas fa-building"></i>
+                                                İletişim Bilgisi
+                                            </h5>
+                                        </div>
+                                        <div class="contact-card-body">
+                                            <div class="contact-info-item">
+                                                <div class="contact-icon">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </div>
+                                                <div class="contact-info-content">
+                                                    <div class="contact-info-label">Adres</div>
+                                                    <div class="contact-info-value">@item.Address</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="contact-info-item">
+                                                <div class="contact-icon">
+                                                    <i class="fas fa-phone-alt"></i>
+                                                </div>
+                                                <div class="contact-info-content">
+                                                    <div class="contact-info-label">Telefon</div>
+                                                    <div class="contact-info-value">@item.Phone</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="contact-info-item">
+                                                <div class="contact-icon">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                                <div class="contact-info-content">
+                                                    <div class="contact-info-label">E-posta</div>
+                                                    <div class="contact-info-value">@item.Email</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="contact-info-item">
+                                                <div class="contact-icon">
+                                                    <i class="fas fa-clock"></i>
+                                                </div>
+                                                <div class="contact-info-content">
+                                                    <div class="contact-info-label">Açık Saatler</div>
+                                                    <div class="contact-info-value">@Html.Raw(item.OpenHours)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="contact-actions">
+                                            <a href="/Contact/UpdateContact/@item.ContactId/" class="modern-btn btn-edit" title="Düzenle">
+                                                <i class="fas fa-edit"></i>
+                                                Düzenle
+                                            </a>
+                                            <a href="/Contact/DeleteContact/@item.ContactId/" class="modern-btn btn-delete" title="Sil" onclick="return confirm('Bu iletişim bilgisini silmek istediğinize emin misiniz?');">
+                                                <i class="fas fa-trash-alt"></i>
+                                                Sil
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="contact-cards-grid">
+                                <div class="empty-state">
+                                    <i class="fas fa-address-card"></i>
+                                    <p>Henüz iletişim bilgisi eklenmemiş.</p>
+                                    <a href="/Contact/CreateContact/" class="modern-btn btn-create" style="display: inline-flex; margin-top: 1rem;">
+                                        <i class="fas fa-plus"></i>
+                                        İlk İletişim Bilgisini Ekle
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer" style="background: white; border-top: 2px solid #f0f0f0;">
+                        <div style="color: #999; font-size: 0.875rem;">
+                            <i class="fas fa-info-circle"></i>
+                            Toplam <strong style="color: #667eea;">@Model.Count</strong> iletişim bilgisi listelendi
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+------------------------------------------------------------------------
+
+@model List<ResultContactDto>
+@{
+    ViewData["Title"] = "ContactList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .modern-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        border: none;
+    }
+    
+    .contact-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .contact-with-map {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .map-container {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        min-height: 500px;
+    }
+    
+    .map-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
+        color: white;
+    }
+    
+    .map-header h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .map-iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 450px;
+        border: none;
+    }
+    
+    .contact-info-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+        border-color: #667eea;
+    }
+    
+    .contact-card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1.2rem;
+        color: white;
+    }
+    
+    .contact-card-header h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .contact-card-body {
+        padding: 1.5rem;
+    }
+    
+    .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9ff;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-info-item:hover {
+        background: #e8ecff;
+        transform: translateX(5px);
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    
+    .contact-info-content {
+        flex: 1;
+    }
+    
+    .contact-info-label {
+        font-size: 0.75rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+    }
+    
+    .contact-info-value {
+        color: #333;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+    
+    .contact-actions {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        display: flex;
+        gap: 0.75rem;
+    }
+    
+    .modern-btn {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+    
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .btn-delete {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+    }
+    
+    .btn-create {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #999;
+        grid-column: 1 / -1;
+    }
+    
+    .empty-state i {
+        font-size: 4rem;
+        color: #ddd;
+        margin-bottom: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-cards-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .contact-with-map {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card modern-card">
+                    <div class="card-header" style="background: white; border-bottom: 2px solid #f0f0f0; border-radius: 15px 15px 0 0;">
+                        <h4 style="color: #667eea; font-weight: 700; margin: 0;">
+                            <i class="fas fa-address-book" style="margin-right: 10px;"></i>
+                            İletişim Bilgileri Listesi
+                        </h4>
+                        <div class="card-header-action">
+                            <a href="/Contact/CreateContact/" class="modern-btn btn-create">
+                                <i class="fas fa-plus"></i>
+                                Yeni İletişim Bilgisi Ekle
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        @if (Model.Count > 0)
+                        {
+                            <div class="contact-with-map">
+                                <div>
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="contact-info-card">
+                                            <div class="contact-card-header">
+                                                <h5>
+                                                    <i class="fas fa-building"></i>
+                                                    İletişim Bilgisi
+                                                </h5>
+                                            </div>
+                                            <div class="contact-card-body">
+                                                <div class="contact-info-item">
+                                                    <div class="contact-icon">
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                    </div>
+                                                    <div class="contact-info-content">
+                                                        <div class="contact-info-label">Adres</div>
+                                                        <div class="contact-info-value">@item.Address</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="contact-info-item">
+                                                    <div class="contact-icon">
+                                                        <i class="fas fa-phone-alt"></i>
+                                                    </div>
+                                                    <div class="contact-info-content">
+                                                        <div class="contact-info-label">Telefon</div>
+                                                        <div class="contact-info-value">@item.Phone</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="contact-info-item">
+                                                    <div class="contact-icon">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </div>
+                                                    <div class="contact-info-content">
+                                                        <div class="contact-info-label">E-posta</div>
+                                                        <div class="contact-info-value">@item.Email</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="contact-info-item">
+                                                    <div class="contact-icon">
+                                                        <i class="fas fa-clock"></i>
+                                                    </div>
+                                                    <div class="contact-info-content">
+                                                        <div class="contact-info-label">Açık Saatler</div>
+                                                        <div class="contact-info-value">@Html.Raw(item.OpenHours)</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="contact-actions">
+                                                <a href="/Contact/UpdateContact/@item.ContactId/" class="modern-btn btn-edit" title="Düzenle">
+                                                    <i class="fas fa-edit"></i>
+                                                    Düzenle
+                                                </a>
+                                                <a href="/Contact/DeleteContact/@item.ContactId/" class="modern-btn btn-delete" title="Sil" onclick="return confirm('Bu iletişim bilgisini silmek istediğinize emin misiniz?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                    Sil
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                
+                                <div class="map-container">
+                                    <div class="map-header">
+                                        <h5>
+                                            <i class="fas fa-map-marked-alt"></i>
+                                            Konum
+                                        </h5>
+                                    </div>
+                                    <iframe class="map-iframe"
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.2460094431635!2d29.02377631537!3d41.015137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9f4e0000001%3A0x1!2zS2FkxLFrw7Z5!5e0!3m2!1str!2str!4v1234567890123!5m2!1str!2str"
+                                            allowfullscreen=""
+                                            loading="lazy"
+                                            referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="contact-cards-grid">
+                                <div class="empty-state">
+                                    <i class="fas fa-address-card"></i>
+                                    <p>Henüz iletişim bilgisi eklenmemiş.</p>
+                                    <a href="/Contact/CreateContact/" class="modern-btn btn-create" style="display: inline-flex; margin-top: 1rem;">
+                                        <i class="fas fa-plus"></i>
+                                        İlk İletişim Bilgisini Ekle
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="card-footer" style="background: white; border-top: 2px solid #f0f0f0;">
+                        <div style="color: #999; font-size: 0.875rem;">
+                            <i class="fas fa-info-circle"></i>
+                            Toplam <strong style="color: #667eea;">@Model.Count</strong> iletişim bilgisi listelendi
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+----------------------------------------------------------------
+

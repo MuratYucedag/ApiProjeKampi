@@ -11,48 +11,48 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         border: none;
     }
-
+    
     .modern-table {
         border-collapse: separate;
         border-spacing: 0;
     }
-
-        .modern-table thead th {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
-            color: #667eea;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.5px;
-            padding: 0.9rem 0.7rem;
-            border: none;
-            border-bottom: 2px solid #667eea;
-        }
-
-            .modern-table thead th:first-child {
-                border-top-left-radius: 10px;
-            }
-
-            .modern-table thead th:last-child {
-                border-top-right-radius: 10px;
-            }
-
-        .modern-table tbody tr {
-            transition: all 0.3s ease;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-            .modern-table tbody tr:hover {
-                background-color: #f8f9ff;
-                box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-            }
-
-        .modern-table tbody td {
-            padding: 0.9rem 0.7rem;
-            vertical-align: middle;
-            font-size: 0.9rem;
-        }
-
+    
+    .modern-table thead th {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+        color: #667eea;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        padding: 0.9rem 0.7rem;
+        border: none;
+        border-bottom: 2px solid #667eea;
+    }
+    
+    .modern-table thead th:first-child {
+        border-top-left-radius: 10px;
+    }
+    
+    .modern-table thead th:last-child {
+        border-top-right-radius: 10px;
+    }
+    
+    .modern-table tbody tr {
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .modern-table tbody tr:hover {
+        background-color: #f8f9ff;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    }
+    
+    .modern-table tbody td {
+        padding: 0.9rem 0.7rem;
+        vertical-align: middle;
+        font-size: 0.9rem;
+    }
+    
     .reservation-number {
         width: 32px;
         height: 32px;
@@ -65,13 +65,13 @@
         font-weight: bold;
         font-size: 0.85rem;
     }
-
+    
     .customer-name {
         color: #333;
         font-weight: 600;
         font-size: 0.9rem;
     }
-
+    
     .date-badge {
         background: #e3f2fd;
         color: #1565c0;
@@ -81,7 +81,7 @@
         font-weight: 500;
         display: inline-block;
     }
-
+    
     .time-badge {
         background: #f3e5f5;
         color: #6a1b9a;
@@ -91,7 +91,7 @@
         font-weight: 500;
         display: inline-block;
     }
-
+    
     .people-badge {
         background: #fff3e0;
         color: #e65100;
@@ -101,7 +101,7 @@
         font-weight: 600;
         display: inline-block;
     }
-
+    
     .status-badge {
         padding: 0.4rem 0.8rem;
         border-radius: 15px;
@@ -109,22 +109,22 @@
         font-weight: 600;
         display: inline-block;
     }
-
+    
     .status-approved {
         background: #d4edda;
         color: #155724;
     }
-
+    
     .status-pending {
         background: #fff3cd;
         color: #856404;
     }
-
+    
     .status-cancelled {
         background: #f8d7da;
         color: #721c24;
     }
-
+    
     .modern-btn {
         padding: 0.4rem 0.8rem;
         border-radius: 6px;
@@ -137,50 +137,42 @@
         gap: 0.4rem;
         white-space: nowrap;
     }
-
-        .modern-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
+    
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
     .btn-edit {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
     }
-
+    
     .btn-delete {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
     }
-
+    
     .btn-approve {
         background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         color: white;
     }
-
+    
     .btn-cancel {
         background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
         color: white;
     }
-
+    
     .btn-wait {
         background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
         color: white;
     }
-
+    
     .action-buttons {
         display: flex;
         gap: 0.3rem;
         flex-wrap: wrap;
     }
-
-    .btn-create {
-        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-    }
-
 </style>
 
 <section class="section">
@@ -193,13 +185,6 @@
                             <i class="fas fa-calendar-check" style="margin-right: 10px;"></i>
                             Rezervasyon Listesi
                         </h4>
-                    
-                    <div class="card-header-action">
-                        <a href="/Reservation/CreateReservation/" class="modern-btn btn-create">
-                            <i class="fas fa-plus"></i>
-                            Yeni Rezervasyon Girişi
-                        </a>
-                    </div>
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
@@ -207,12 +192,12 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 3%;">#</th>
-                                        <th scope="col" style="width: 13%;">Müşteri Adı</th>
-                                        <th scope="col" style="width: 12%;">Rezervasyon Tarih</th>
-                                        <th scope="col" style="width: 7%;">Rezervasyon Saati</th>
-                                        <th scope="col" style="width: 6%;">Kişi Sayısı</th>
-                                        <th scope="col" style="width: 12%;">Rezervasyon Durumu</th>
-                                        <th scope="col" style="width: 47%;" class="text-center">İşlemler</th>
+                                        <th scope="col" style="width: 10%;">Müşteri Adı</th>
+                                        <th scope="col" style="width: 10%;">Rezervasyon Tarih</th>
+                                        <th scope="col" style="width: 8%;">Rezervasyon Saati</th>
+                                        <th scope="col" style="width: 7%;">Kişi Sayısı</th>
+                                        <th scope="col" style="width: 10%;">Rezervasyon Durumu</th>
+                                        <th scope="col" style="width: 52%;" class="text-center">İşlemler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -313,3 +298,7 @@
         </div>
     </div>
 </section>
+
+
+------------------------------------------------------------------
+

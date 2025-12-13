@@ -74,5 +74,10 @@ namespace ApiProjeKampi.WebUI.Controllers
             await client.PutAsync("https://localhost:7020/api/YummyEvents/", stringContent);
             return RedirectToAction("YummyEventList");
         }
+
+        public IActionResult Test()
+        {
+            return View();
+        }
     }
 }

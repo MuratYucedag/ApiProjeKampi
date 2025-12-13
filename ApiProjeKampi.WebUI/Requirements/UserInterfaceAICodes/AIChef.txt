@@ -1,7 +1,8 @@
-﻿@model List<ResultAboutDto>
+﻿@model List<ResultChefDto>
 @{
-    ViewData["Title"] = "AboutList";
+    ViewData["Title"] = "ChefList";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 
 <style>
@@ -10,96 +11,107 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         border: none;
     }
-
+    
     .modern-table {
         border-collapse: separate;
         border-spacing: 0;
     }
-
-        .modern-table thead th {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
-            color: #667eea;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-            padding: 1rem;
-            border: none;
-            border-bottom: 2px solid #667eea;
-        }
-
-            .modern-table thead th:first-child {
-                border-top-left-radius: 10px;
-            }
-
-            .modern-table thead th:last-child {
-                border-top-right-radius: 10px;
-            }
-
-        .modern-table tbody tr {
-            transition: all 0.3s ease;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-            .modern-table tbody tr:hover {
-                background-color: #f8f9ff;
-                transform: scale(1.01);
-                box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-            }
-
-        .modern-table tbody td {
-            padding: 1rem;
-            vertical-align: middle;
-        }
-
-    .about-icon {
+    
+    .modern-table thead th {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+        color: #667eea;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+        border: none;
+        border-bottom: 2px solid #667eea;
+    }
+    
+    .modern-table thead th:first-child {
+        border-top-left-radius: 10px;
+    }
+    
+    .modern-table thead th:last-child {
+        border-top-right-radius: 10px;
+    }
+    
+    .modern-table tbody tr {
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .modern-table tbody tr:hover {
+        background-color: #f8f9ff;
+        transform: scale(1.01);
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    }
+    
+    .modern-table tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+    }
+    
+    .chef-avatar {
         width: 50px;
         height: 50px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        font-size: 1.4rem;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border: 3px solid white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-
-    .title-badge {
+    
+    .chef-number {
+        width: 35px;
+        height: 35px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: white;
-        padding: 0.5rem 1.2rem;
-        border-radius: 20px;
+        font-weight: bold;
         font-size: 0.9rem;
+    }
+    
+    .chef-name {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .chef-hat-icon {
+        color: #fa709a;
+        font-size: 1rem;
+    }
+    
+    .chef-title-badge {
+        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        color: #333;
+        padding: 0.4rem 0.9rem;
+        border-radius: 15px;
+        font-size: 0.85rem;
         font-weight: 600;
         display: inline-block;
     }
-
-    .description-box {
-        background: #f8f9ff;
-        border-left: 4px solid #667eea;
-        padding: 1rem;
-        border-radius: 8px;
-        color: #555;
+    
+    .chef-description {
+        color: #666;
         font-size: 0.9rem;
-        line-height: 1.6;
-        max-height: 150px;
-        overflow-y: auto;
+        line-height: 1.5;
+        max-width: 500px;
     }
-
-        .description-box::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .description-box::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .description-box::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 10px;
-        }
-
+    
     .modern-btn {
         padding: 0.5rem 1rem;
         border-radius: 8px;
@@ -111,27 +123,27 @@
         align-items: center;
         gap: 0.5rem;
     }
-
-        .modern-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
+    
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
     .btn-edit {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
     }
-
+    
     .btn-delete {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
     }
-
+    
     .btn-view {
         background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         color: white;
     }
-
+    
     .btn-create {
         background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         color: white;
@@ -147,13 +159,13 @@
                 <div class="card modern-card">
                     <div class="card-header" style="background: white; border-bottom: 2px solid #f0f0f0; border-radius: 15px 15px 0 0;">
                         <h4 style="color: #667eea; font-weight: 700; margin: 0;">
-                            <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
-                            Hakkımda Sayfası Listesi
+                            <i class="fas fa-user-chef" style="margin-right: 10px;"></i>
+                            Şef Listesi
                         </h4>
                         <div class="card-header-action">
-                            <a href="/About/CreateAbout/" class="modern-btn btn-create">
+                            <a href="/Chef/CreateChef/" class="modern-btn btn-create">
                                 <i class="fas fa-plus"></i>
-                                Yeni Hakkımda Alanı Ekle
+                                Yeni Şef Ekle
                             </a>
                         </div>
                     </div>
@@ -162,42 +174,57 @@
                             <table class="table modern-table">
                                 <thead>
                                     <tr>
+                                        <th scope="col" style="width: 5%;">#</th>
                                         <th scope="col" style="width: 5%;"></th>
-                                        <th scope="col" style="width: 20%;">Başlık</th>
-                                        <th scope="col" style="width: 55%;">Açıklama</th>
+                                        <th scope="col" style="width: 15%;">Şef Adı</th>
+                                        <th scope="col" style="width: 18%;">Başlık</th>
+                                        <th scope="col" style="width: 37%;">Açıklama</th>
                                         <th scope="col" style="width: 20%;" class="text-center">İşlemler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
+                                        count++;
                                         <tr>
                                             <td>
-                                                <div class="about-icon">
-                                                    <i class="fas fa-file-alt"></i>
+                                                <div class="chef-number">
+                                                    @count
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="title-badge">
-                                                    <i class="fas fa-heading"></i> @item.Title
+                                                <div class="chef-avatar">
+                                                    @item.NameSurname.Substring(0, 1).ToUpper()
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="chef-name">
+                                                    <i class="fas fa-hat-chef chef-hat-icon"></i>
+                                                    @item.NameSurname
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="chef-title-badge">
+                                                    <i class="fas fa-award"></i> @item.Title
                                                 </span>
                                             </td>
                                             <td>
-                                                <div class="description-box">
+                                                <div class="chef-description">
+                                                    <i class="fas fa-quote-left" style="color: #ccc; font-size: 0.7rem; margin-right: 5px;"></i>
                                                     @item.Description
                                                 </div>
                                             </td>
                                             <td class="text-center">
                                                 <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                                                    <a href="/About/ViewAbout/@item.AboutId/" class="modern-btn btn-view" title="Görüntüle">
+                                                    <a href="/Chef/ViewChef/@item.ChefId/" class="modern-btn btn-view" title="Görüntüle">
                                                         <i class="fas fa-eye"></i>
                                                         Görüntüle
                                                     </a>
-                                                    <a href="/About/UpdateAbout/@item.AboutId/" class="modern-btn btn-edit" title="Düzenle">
+                                                    <a href="/Chef/UpdateChef/@item.ChefId/" class="modern-btn btn-edit" title="Düzenle">
                                                         <i class="fas fa-edit"></i>
                                                         Düzenle
                                                     </a>
-                                                    <a href="/About/DeleteAbout/@item.AboutId/" class="modern-btn btn-delete" title="Sil" onclick="return confirm('Bu hakkımda alanını silmek istediğinize emin misiniz?');">
+                                                    <a href="/Chef/DeleteChef/@item.ChefId/" class="modern-btn btn-delete" title="Sil" onclick="return confirm('Bu şefi silmek istediğinize emin misiniz?');">
                                                         <i class="fas fa-trash-alt"></i>
                                                         Sil
                                                     </a>
@@ -212,7 +239,7 @@
                     <div class="card-footer" style="background: white; border-top: 2px solid #f0f0f0;">
                         <div style="color: #999; font-size: 0.875rem;">
                             <i class="fas fa-info-circle"></i>
-                            Toplam <strong style="color: #667eea;">@Model.Count</strong> hakkımda kaydı listelendi
+                            Toplam <strong style="color: #667eea;">@Model.Count</strong> şef listelendi
                         </div>
                     </div>
                 </div>
