@@ -1,4 +1,90 @@
-﻿@model List<ResultMessageDto>
+﻿INSERT INTO [dbo].[Messages]
+([NameSurname], [Email], [Subject], [MessageDetails], [SendDate], [IsRead], [Status])
+VALUES
+('Ahmet Yılmaz', 'ahmet.yilmaz@gmail.com', 'Rezervasyon Hakkında',
+'Merhaba, hafta sonu için 4 kişilik bir rezervasyon oluşturmak istiyorum ancak online sistemde uygun saat bulamadım. Cumartesi akşamı saat 20:00 civarında müsaitliğiniz olup olmadığını öğrenmek istiyorum. Geri dönüş yaparsanız çok sevinirim.',
+'2025-01-05 10:15:00', 0, 'Yeni'),
+
+('Elif Demir', 'elif.demir@hotmail.com', 'Paket Servis Gecikmesi',
+'Dün akşam verdiğim paket servis siparişi belirtilen süreden yaklaşık 40 dakika geç geldi. Yemekler lezzetliydi ancak gecikme nedeniyle biraz mağdur oldum. Bu konuda bilgilendirme yapabilir misiniz, ilerleyen siparişler için nasıl bir çözüm sunuyorsunuz?',
+'2025-01-05 11:40:00', 1, 'Okundu'),
+
+('Mehmet Kaya', 'mehmet.kaya@yahoo.com', 'Menü İçeriği Bilgisi',
+'Merhaba, menünüzde yer alan vejetaryen makarnanın içerisinde tam olarak hangi malzemeler kullanılıyor öğrenmek istiyorum. Özellikle süt ürünü içerip içermediği benim için önemli. Bilgi verebilirseniz rezervasyon yapmayı düşünüyorum.',
+'2025-01-06 09:05:00', 1, 'Yanıtlandı'),
+
+('Zeynep Çelik', 'zeynep.celik@gmail.com', 'Doğum Günü Organizasyonu',
+'Önümüzdeki hafta arkadaşım için küçük bir doğum günü organizasyonu planlıyoruz. Masa süslemesi, küçük bir pasta veya mum gibi ekstra hizmetleriniz var mı öğrenmek istiyorum. Ortalama kişi başı fiyat bilgisi de paylaşırsanız çok yardımcı olur.',
+'2025-01-06 14:20:00', 0, 'Beklemede'),
+
+('Murat Aksoy', 'murat.aksoy@gmail.com', 'Çocuk Menüsü',
+'Merhaba, restoranınıza ailemle gelmeyi düşünüyorum. Küçük bir çocuğumuz var ve çocuklara özel menü ya da porsiyon seçenekleri sunup sunmadığınızı öğrenmek istiyorum. Ayrıca mama sandalyesi bulunuyor mu bilgi verebilir misiniz?',
+'2025-01-07 08:45:00', 1, 'Okundu'),
+
+('Ayşe Karaca', 'ayse.karaca@hotmail.com', 'Fatura Talebi',
+'Geçtiğimiz günlerde restoranınızda şirket yemeği düzenledik. Ödemeyi yaptıktan sonra fatura talep etmiştik ancak mail adresimize ulaşmadı. Tekrar gönderebilir misiniz? Gerekli bilgileri paylaşabilirim.',
+'2025-01-07 10:30:00', 1, 'Yanıtlandı'),
+
+('Can Öztürk', 'can.ozturk@gmail.com', 'Masaya Servis Süresi',
+'Geçen hafta akşam saatlerinde restoranınızdaydık. Yoğunluk olmasına rağmen servis biraz yavaştı. Bunun geçici bir durum mu olduğunu öğrenmek istiyorum. Genel olarak memnun kaldık, sadece bilgilendirme almak istedim.',
+'2025-01-07 16:10:00', 0, 'Yeni'),
+
+('Selin Arslan', 'selin.arslan@yahoo.com', 'Glütensiz Seçenekler',
+'Merhaba, çölyak hastasıyım ve glütensiz besleniyorum. Menünüzde glütensiz yemek seçenekleri bulunuyor mu? Varsa çapraz bulaşma konusunda nasıl bir hassasiyet gösteriyorsunuz? Bilgi verirseniz çok memnun olurum.',
+'2025-01-08 09:55:00', 1, 'Yanıtlandı'),
+
+('Emre Şahin', 'emre.sahin@gmail.com', 'Online Sipariş Sorunu',
+'Web siteniz üzerinden sipariş vermeye çalıştım ancak ödeme aşamasında hata aldım. Farklı tarayıcı denememe rağmen sorun devam etti. Bu durumla ilgili bir çalışma var mı, telefonla sipariş vermek mümkün mü?',
+'2025-01-08 11:25:00', 1, 'Beklemede'),
+
+('Büşra Aydın', 'busra.aydin@hotmail.com', 'Eksik Ürün',
+'Az önce gelen paket serviste sipariş ettiğim salata bulunmuyordu. Diğer ürünler tam ancak salata eksik geldi. Kısa sürede gönderim yapabilir misiniz ya da ücret iadesi konusunda nasıl bir yol izliyorsunuz?',
+'2025-01-08 14:50:00', 0, 'Yeni'),
+
+('Ali Koç', 'ali.koc@gmail.com', 'Canlı Müzik Bilgisi',
+'Merhaba, hafta sonları canlı müzik etkinliğiniz olduğunu duydum. Hangi günler yapıldığını ve rezervasyon zorunlu olup olmadığını öğrenmek istiyorum. Ayrıca müzik saatleriyle ilgili de bilgi verebilir misiniz?',
+'2025-01-09 10:00:00', 1, 'Kapandı'),
+
+('Fatma Tunç', 'fatma.tunc@yahoo.com', 'Kurumsal Yemek',
+'Şirketimiz için toplu bir akşam yemeği planlıyoruz. Ortalama 15-20 kişilik bir grup olacağız. Sabit menü ya da özel indirim seçenekleriniz var mı? Detayları mail yoluyla da paylaşabilirsiniz.',
+'2025-01-09 13:15:00', 0, 'Beklemede'),
+
+('Hakan Polat', 'hakan.polat@gmail.com', 'Rezervasyon İptali',
+'Bugün akşam için yaptırdığımız rezervasyonu maalesef iptal etmek zorundayız. Online sistemden iptal edemedim. Yardımcı olabilir misiniz? İlerleyen günlerde tekrar gelmeyi planlıyoruz.',
+'2025-01-10 09:30:00', 1, 'Yanıtlandı'),
+
+('Derya Kılıç', 'derya.kilic@hotmail.com', 'Tatlı Menüsü',
+'Merhaba, tatlı menünüzde ev yapımı olan ürünler hangileri öğrenmek istiyorum. Özellikle şeker oranı düşük ve sütlü tatlı seçenekleri varsa tercih etmek isterim. Bilgilendirirseniz çok sevinirim.',
+'2025-01-10 11:45:00', 1, 'Okundu'),
+
+('Oğuzhan Yıldırım', 'oguzhan.yildirim@gmail.com', 'Vale Hizmeti',
+'Restoranınızda vale hizmeti bulunup bulunmadığını öğrenmek istiyorum. Özellikle hafta sonları park yeri bulmak zor olabiliyor. Vale varsa ücret bilgisiyle birlikte paylaşabilir misiniz?',
+'2025-01-10 15:20:00', 0, 'Yeni'),
+
+('Cansu Erdem', 'cansu.erdem@yahoo.com', 'Teslimat Alanı',
+'Paket servisiniz bizim mahalleye teslimat yapıyor mu emin olamadım. Adres bilgimi paylaşsam kontrol edebilir misiniz? Ayrıca ortalama teslimat süresi hakkında da bilgi alabilir miyim?',
+'2025-01-11 10:10:00', 1, 'Beklemede'),
+
+('Serkan Doğan', 'serkan.dogan@gmail.com', 'Personel Davranışı',
+'Dün akşam restoranınızda güzel bir deneyim yaşadık. Özellikle servis personeliniz çok ilgiliydi. Bu geri bildirimi paylaşmak istedim. Emeği geçen herkese teşekkür ederim.',
+'2025-01-11 13:35:00', 1, 'Kapandı'),
+
+('Ece Uslu', 'ece.uslu@hotmail.com', 'Kampanya Bilgisi',
+'Merhaba, sosyal medyada hafta içi menü kampanyası gördüm ancak detayları bulamadım. Kampanya hangi günleri kapsıyor ve rezervasyon gerekiyor mu? Bilgi alabilirsem sevinirim.',
+'2025-01-12 09:00:00', 1, 'Arşivlendi'),
+
+('Burak Güneş', 'burak.gunes@gmail.com', 'Uygulama Hatası',
+'Mobil uygulamanız üzerinden rezervasyon yapmaya çalıştığımda uygulama kapanıyor. Telefonum güncel ve başka uygulamalarda sorun yaşamıyorum. Bu konuda bir çözüm varsa paylaşabilir misiniz?',
+'2025-01-12 12:25:00', 0, 'Beklemede'),
+
+('Nazlı Şimşek', 'nazli.simsek@yahoo.com', 'Şifre Yenileme',
+'Uygulama şifremi unuttum ancak şifre yenileme maili tarafıma ulaşmadı. Spam klasörünü de kontrol ettim. Tekrar gönderim yapabilir misiniz ya da manuel destek alabilir miyim?',
+'2025-01-12 16:40:00', 1, 'Yanıtlandı');
+
+
+--------------------------------------------------------------------------------
+
+@model List<ResultMessageDto>
 @{
     ViewData["Title"] = "MessageList";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -11,11 +97,11 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
         border: none;
     }
-
+    
     .messages-container {
         padding: 1.5rem;
     }
-
+    
     .message-item {
         background: white;
         border-radius: 12px;
@@ -29,13 +115,13 @@
         gap: 1.5rem;
         align-items: center;
     }
-
-        .message-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
-            border-left-color: #764ba2;
-        }
-
+    
+    .message-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+        border-left-color: #764ba2;
+    }
+    
     .message-number {
         width: 45px;
         height: 45px;
@@ -49,12 +135,12 @@
         font-size: 1rem;
         flex-shrink: 0;
     }
-
+    
     .message-content {
         flex: 1;
         min-width: 0;
     }
-
+    
     .message-header {
         display: flex;
         align-items: center;
@@ -62,7 +148,7 @@
         margin-bottom: 0.5rem;
         flex-wrap: wrap;
     }
-
+    
     .sender-name {
         font-size: 1.1rem;
         font-weight: 600;
@@ -71,7 +157,7 @@
         align-items: center;
         gap: 0.5rem;
     }
-
+    
     .sender-email {
         color: #667eea;
         font-size: 0.85rem;
@@ -79,7 +165,7 @@
         padding: 0.25rem 0.7rem;
         border-radius: 12px;
     }
-
+    
     .message-date {
         color: #999;
         font-size: 0.8rem;
@@ -87,14 +173,14 @@
         align-items: center;
         gap: 0.3rem;
     }
-
+    
     .message-subject {
         font-size: 0.95rem;
         color: #555;
         margin-bottom: 0.5rem;
         font-weight: 500;
     }
-
+    
     .message-preview {
         color: #999;
         font-size: 0.85rem;
@@ -103,14 +189,14 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-
+    
     .message-actions {
         display: flex;
         gap: 0.5rem;
         flex-wrap: wrap;
         justify-content: flex-end;
     }
-
+    
     .modern-btn {
         padding: 0.5rem 1rem;
         border-radius: 8px;
@@ -124,62 +210,59 @@
         text-decoration: none;
         white-space: nowrap;
     }
-
-        .modern-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
+    
+    .modern-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
     .btn-open {
         background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
         color: white;
     }
-
+    
     .btn-edit {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
     }
-
+    
     .btn-delete {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white;
     }
-
+    
     .btn-create {
         background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         color: white;
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
     }
-
+    
     .empty-state {
         text-align: center;
         padding: 4rem 2rem;
         color: #999;
     }
-
-        .empty-state i {
-            font-size: 4rem;
-            color: #ddd;
-            margin-bottom: 1rem;
-        }
-
+    
+    .empty-state i {
+        font-size: 4rem;
+        color: #ddd;
+        margin-bottom: 1rem;
+    }
+    
     .subject-icon {
         color: #667eea;
         margin-right: 0.3rem;
     }
-
-    @@media (max-width: 768px) {
-        .message-item
-
-    {
-        grid-template-columns: 1fr;
-    }
-
-    .message-actions {
-        justify-content: flex-start;
-    }
-
+    
+    @media (max-width: 768px) {
+        .message-item {
+            grid-template-columns: 1fr;
+        }
+        
+        .message-actions {
+            justify-content: flex-start;
+        }
     }
 </style>
 
@@ -211,7 +294,7 @@
                                         <div class="message-number">
                                             @count
                                         </div>
-
+                                        
                                         <div class="message-content">
                                             <div class="message-header">
                                                 <div class="sender-name">
@@ -227,21 +310,21 @@
                                                     @item.SendDate.ToString("dd MMM yyyy")
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="message-subject">
                                                 <i class="fas fa-tag subject-icon"></i>
                                                 <strong>Konu:</strong> @item.Subject
                                             </div>
-
-                                            @if (!string.IsNullOrEmpty(item.MessageDetails))
+                                            
+                                            @if (!string.IsNullOrEmpty(item.MessageContent))
                                             {
                                                 <div class="message-preview">
                                                     <i class="fas fa-comment-dots" style="color: #ccc; margin-right: 0.3rem;"></i>
-                                                    @item.MessageDetails
+                                                    @item.MessageContent
                                                 </div>
                                             }
                                         </div>
-
+                                        
                                         <div class="message-actions">
                                             <a href="/Message/AsnwerMessageWithOpenAI/@item.MessageId/" class="modern-btn btn-open" title="Mesajı Aç">
                                                 <i class="fas fa-envelope-open"></i>
@@ -281,3 +364,6 @@
         </div>
     </div>
 </section>
+
+--------------------------------------------------------------------------------
+
